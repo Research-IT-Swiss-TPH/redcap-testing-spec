@@ -1,0 +1,4 @@
+{
+    "baseUrl": "https://redcap-dev.swisstph.ch/redcap/",
+    "experimentalInteractiveRunEvents": true
+}

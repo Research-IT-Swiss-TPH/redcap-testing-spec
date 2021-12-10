@@ -18,3 +18,16 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+//  Persist session cookie
+Cypress.Cookies.defaults({ preserve: "PHPSESSID" })
+
+//  Before all tests
+before(()=>{
+    cy.login()
+})
+
+//  After all tests
+after( ()=> {
+    cy.logout()
+})

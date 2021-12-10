@@ -1,0 +1,7 @@
+{
+    "redcap_base_url": "https://redcap-dev.swisstph.ch/redcap/",
+    "redcap_survey_base_url": "https://survey-dev.swisstph.ch/redcap/",
+    "admin_email": "redcap@swisstph.ch",
+
+    "auth_ip_range":"131.152.*.*"
+}

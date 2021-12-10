@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.visit('/')
+    cy.get('input[name=username]').type(Cypress.env('username'))
+    cy.get('input[name=password]').type(Cypress.env('password'))
+    cy.get('button#login_btn').click()
+    cy.get('#username-reference').contains(Cypress.env('username'))
+})
+
+Cypress.Commands.add('logout', () => {    
+    const path_control_center = '/redcap_v' + Cypress.env('version') + '/ControlCenter'    
+    cy.visit( path_control_center + '/index.php?logout=1')
+})

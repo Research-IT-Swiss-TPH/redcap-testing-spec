@@ -1,4 +1,8 @@
 {
     "baseUrl": "https://redcap-dev.swisstph.ch/redcap/",
-    "experimentalInteractiveRunEvents": true
+    "experimentalInteractiveRunEvents": true,
+    "testFiles": [
+        "system_config.spec.js",
+        "external_modules.spec.js"
+    ]
 }

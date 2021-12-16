@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-file-upload';
+
 Cypress.Commands.add('login', () => {
     cy.visit('/')
     cy.get('input[name=username]').type(Cypress.env('username'))
@@ -33,6 +35,6 @@ Cypress.Commands.add('login', () => {
 })
 
 Cypress.Commands.add('logout', () => {    
-    const path_control_center = '/redcap_v' + Cypress.env('version') + '/ControlCenter'    
+    const path_control_center = '/redcap_v' + Cypress.env('version') + '/ControlCenter'
     cy.visit( path_control_center + '/index.php?logout=1')
 })

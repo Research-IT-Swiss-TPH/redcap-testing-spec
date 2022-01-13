@@ -1,8 +1,9 @@
 {
-    "baseUrl": "https://redcap-dev.swisstph.ch/redcap/",
-    "experimentalInteractiveRunEvents": true,
-    "testFiles": [
-        "system_config.spec.js",
-        "external_modules.spec.js"
-    ]
+  "baseUrl": "https://redcap-dev.swisstph.ch/redcap/",
+  "experimentalInteractiveRunEvents": true,
+  "testFiles": [
+    "system_config.spec.js",
+    "external_modules.spec.js"
+  ],
+  "projectId": "wq6wgm"
 }

@@ -15,6 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import './helpers'
+
+//  <Spec Assertion Data>
+const data_em = require('../../data/external_modules.json')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -29,5 +33,6 @@ before(()=>{
 
 //  After all tests
 after( ()=> {
+    cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
     cy.logout()
 })

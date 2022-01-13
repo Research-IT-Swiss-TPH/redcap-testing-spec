@@ -38,3 +38,10 @@ Cypress.Commands.add('logout', () => {
     const path_control_center = '/redcap_v' + Cypress.env('version') + '/ControlCenter'
     cy.visit( path_control_center + '/index.php?logout=1')
 })
+
+Cypress.Commands.add('eraseAllData', (pid) => {
+    const path_project_setup = '/redcap_v' + Cypress.env('version') + '/ProjectSetup/other_functionality.php?pid=' + pid
+    cy.visit(path_project_setup)
+    cy.get('#row_erase button').click()
+    cy.get('button.ui-button').contains("Erase all data").click()    
+})

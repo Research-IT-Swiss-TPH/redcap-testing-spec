@@ -51,10 +51,7 @@ describe('Test External Modules', () => {
     context('Big Data Import', ()=>{
 
         it('is enabled', () =>{
-
-            //  Check if module is enabled
-            cy.visit( path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
-            cy.get('#external-modules-enabled').should("contain", "Big Data Import")
+            cy.moduleIsEnabled('Big Data Import')
             //  Remove all previously added records so that we can test properly
             cy.eraseAllData(data_em.em_test_pid)
     
@@ -115,8 +112,7 @@ describe('Test External Modules', () => {
     context('Complete Row', () => {
 
         it('is enabled', () => {
-            cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
-            cy.get('#external-modules-enabled').should("contain", "Complete Row")  
+            cy.moduleIsEnabled('Complete Row')
         })
 
         it('colors completed rows', () => {
@@ -140,8 +136,7 @@ describe('Test External Modules', () => {
     context('Mass Delete', ()=>{
 
         it('is enabled', ()=>{
-            cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
-            cy.get('#external-modules-enabled').should("contain", "Big Data Import")
+            cy.moduleIsEnabled('Mass Delete')
         })
         
         it('can fetch and select all records', () => {
@@ -158,7 +153,20 @@ describe('Test External Modules', () => {
         })
     })
 
+    /**
+     * Custom Survey Landing Page
+     * Description:  A module for creating a nicer landing page for doing mailers and code entry for surveys
+     * 
+     * @since 1.0.0     
+     * 
+     */
+    context('Custom Survey Landing Page', () => {
 
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Custom Survey Landing Page')
+        })
+
+    })
 
 
 })

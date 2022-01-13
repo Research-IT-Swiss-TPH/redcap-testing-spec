@@ -26,6 +26,9 @@
 
 import 'cypress-file-upload';
 
+const data_em = require('../../data/external_modules.json')
+const path_redcap = '/redcap_v' + Cypress.env('version')
+
 Cypress.Commands.add('login', () => {
     cy.visit('/')
     cy.get('input[name=username]').type(Cypress.env('username'))
@@ -37,6 +40,11 @@ Cypress.Commands.add('login', () => {
 Cypress.Commands.add('logout', () => {    
     const path_control_center = '/redcap_v' + Cypress.env('version') + '/ControlCenter'
     cy.visit( path_control_center + '/index.php?logout=1')
+})
+
+Cypress.Commands.add('moduleIsEnabled', (name) => {
+    cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
+    cy.get('#external-modules-enabled').should("contain", name)         
 })
 
 Cypress.Commands.add('eraseAllData', (pid) => {

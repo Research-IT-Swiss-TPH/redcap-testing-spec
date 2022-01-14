@@ -160,10 +160,31 @@ describe('Test External Modules', () => {
      * @since 1.0.0     
      * 
      */
-    context('Custom Survey Landing Page', () => {
+    context.only('Custom Survey Landing Page', () => {
 
         it('is enabled', () => {
             cy.moduleIsEnabled('Custom Survey Landing Page')
+        })
+
+        it('succeeds login with correct SAC', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?id=1&page=base&pid='+ data_em.em_test_pid )
+            cy.get('#submit-btn-saverecord').click()
+            cy.visit(path_redcap + '/Surveys/invite_participants.php?participant_list=1&pid=' + data_em.em_test_pid )
+            cy.get('#table-participant_table a[href="javascript:;"]').click()
+            cy.get('input.staticInput').invoke('val').then( ($sac) => {
+                cy.visit(path_redcap + '/ExternalModules/?prefix=custom_survey_landing_page&page=survey&pid=' + data_em.em_test_pid)
+                cy.get('#access-digit-1').type($sac)
+                cy.get('#submit-btn').click()
+                cy.get('#surveytitle').should('have.text', 'Custom Survey Landing Page')
+            })            
+        })
+
+        it('fails login with wrong SAC', ()=>{
+            cy.visit(path_redcap + '/ExternalModules/?prefix=custom_survey_landing_page&page=survey&pid=' + data_em.em_test_pid)
+            cy.get('#access-digit-1').type('ABCDEFGHS')
+            cy.get('#submit-btn').click()
+            cy.get('#alert-error').should('have.css', 'display', 'block')
+
         })
 
     })

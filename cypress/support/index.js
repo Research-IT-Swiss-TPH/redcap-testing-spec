@@ -13,6 +13,11 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+//  Additional Node Packages
+const dayjs = require('dayjs')
+Cypress.dayjs = dayjs
+
+
 // Import commands.js using ES2015 syntax:
 import './commands'
 import './helpers'

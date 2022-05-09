@@ -176,7 +176,7 @@ describe('Test External Modules', () => {
         it('succeeds login with correct SAC', () => {
             cy.visit(path_redcap + '/DataEntry/index.php?id=1&page=base&pid='+ data_em.em_test_pid )
             cy.get('#submit-btn-saverecord').click()
-            cy.visit(path_redcap + '/Surveys/invite_participants.php?participant_list=1&pid=' + data_em.em_test_pid )
+            cy.visit(path_redcap + '/Surveys/invite_participants.php?participant_list=1&survey_id='+data_em.custom_survey_landing_survey_id+'&pid=' + data_em.em_test_pid )
             cy.get('#table-participant_table a[href="javascript:;"]').click()
             cy.get('input.staticInput').invoke('val').then( ($sac) => {
                 cy.visit(path_redcap + '/ExternalModules/?prefix=custom_survey_landing_page&page=survey&pid=' + data_em.em_test_pid)
@@ -251,7 +251,7 @@ describe('Test External Modules', () => {
      * @since 1.0.0
      */
 
-    context('Form Render Skip Logic', () => {
+    /* context('Form Render Skip Logic', () => {
 
         it('is enabled', () => {
             cy.moduleIsEnabled('Form Render Skip Logic')
@@ -273,7 +273,7 @@ describe('Test External Modules', () => {
         })
 
     })
-
+ */
     /**
      * Instance Table
      * Description: Use the action tag @INSTANCETABLE=form_name in a descriptive text field to include a table showing data from repeat instances of that form.
@@ -340,7 +340,7 @@ describe('Test External Modules', () => {
      * Uses API Token
      * @since 1.0.0
      */
-    context.only('Locking API', () => {
+    context('Locking API', () => {
 
         it('is enabled', () => {
             cy.moduleIsEnabled('Locking API')
@@ -377,20 +377,6 @@ describe('Test External Modules', () => {
             })
         })
 
-        it('unlocks record (data level', () => {
-            cy.request({
-                method:'POST',
-                url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=unlock',
-                failOnStatusCode: false,
-                body: 'token='+api_token + '&returnFormat=json&instrument=base&record=1',
-                form: true
-            }).then((resp) => {
-                expect(resp.status).to.eq(200)
-                var body = JSON.parse(resp.body)[0]
-                expect(body.locked).to.eq('0')
-            })
-        })        
-
         /* Data Level Tests */
         it('locks record (data level', () => {
             cy.request({
@@ -402,7 +388,21 @@ describe('Test External Modules', () => {
             }).then((resp) => {
                 expect(resp.status).to.eq(200)
                 var body = JSON.parse(resp.body)[0]
-                expect(body.locked).to.eq('1')
+                expect(body.timestamp).to.contain('-')
+            })
+        })
+
+        it('unlocks record (data level', () => {
+            cy.request({
+                method:'POST',
+                url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=unlock',
+                failOnStatusCode: false,
+                body: 'token='+api_token + '&returnFormat=json&instrument=base&record=1',
+                form: true
+            }).then((resp) => {
+                expect(resp.status).to.eq(200)
+                var body = JSON.parse(resp.body)[0]
+                expect(body.timestamp).to.eq('')
             })
         })
 
@@ -416,7 +416,7 @@ describe('Test External Modules', () => {
             }).then((resp) => {
                 expect(resp.status).to.eq(200)
                 var body = JSON.parse(resp.body)[0]
-                expect(body.locked).to.eq('1')
+                expect(body.locked).to.eq('0')
             })
         })
 
@@ -467,5 +467,46 @@ describe('Test External Modules', () => {
         })
 
     })
+
+    /**
+     * PDF Injector
+     * 
+     *  To Do
+     *  ☐ Add new Injection
+        ☐ Edit
+        ☐ Delete
+        ☐ Preview
+        ☐ Inject: single, multi, 
+     * 
+     */
+
+
+    /**
+     * Data Quality API
+     * Description: Adds Data Quality API endpoints.
+     * 
+     * @since 1.0.0
+     */
+    context('Data Quality API', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Data Quality API')
+        })
+
+        it('is connecting', () => {
+            cy.request({
+                url: path_api + '?NOAUTH&type=module&prefix=data_quality_api&page=export&pid='+data_em.em_test_pid,
+                method: 'POST',
+                form: true,
+                failOnStatusCode: false,
+                body: 'token='+api_token
+            }).then((res) => {
+                expect(JSON.parse(res.body).length).to.eq(0)                
+            })
+        })
+
+        //  TO DO MORE
+    })
+
 })
 

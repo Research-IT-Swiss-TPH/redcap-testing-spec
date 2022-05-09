@@ -38,6 +38,6 @@ before(()=>{
 
 //  After all tests
 after( ()=> {
-    cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
+    //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
     cy.logout()
 })

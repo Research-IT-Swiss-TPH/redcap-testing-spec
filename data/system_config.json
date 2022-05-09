@@ -7,7 +7,7 @@
 
     "auth_ip_range":"131.152.*.*",
     "homepage_contact_email": "redcap@swisstph.ch",
-    "project_language": "7521-german-858",
+    "project_language": "English",
 
     "external_modules": [
         "Address Auto Complete", 

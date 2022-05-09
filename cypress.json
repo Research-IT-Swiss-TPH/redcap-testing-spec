@@ -4,6 +4,5 @@
   "testFiles": [
     "system_config.spec.js",
     "external_modules.spec.js"
-  ],
-  "projectId": "wq6wgm"
+  ]
 }

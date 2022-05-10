@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="5.1500" tests="6" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-05-10T12:06:01" tests="0" file="cypress/integration/system_config.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Test System Config" timestamp="2022-05-10T12:06:02" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="General Settings" timestamp="2022-05-10T12:06:02" tests="1" time="1.2090" failures="0">
+    <testcase name="Test System Config General Settings validates general settings" time="2.7230" classname="validates general settings">
+    </testcase>
+  </testsuite>
+  <testsuite name="Security Settings" timestamp="2022-05-10T12:06:03" tests="1" time="0.4740" failures="0">
+    <testcase name="Test System Config Security Settings validates security settings" time="0.4740" classname="validates security settings">
+    </testcase>
+  </testsuite>
+  <testsuite name="Misc. Settings" timestamp="2022-05-10T12:06:04" tests="3" time="1.1150" failures="0">
+    <testcase name="Test System Config Misc. Settings validates homepage settings" time="0.3570" classname="validates homepage settings">
+    </testcase>
+    <testcase name="Test System Config Misc. Settings validates project settings" time="0.4000" classname="validates project settings">
+    </testcase>
+    <testcase name="Test System Config Misc. Settings validates admin privileges" time="0.2670" classname="validates admin privileges">
+    </testcase>
+  </testsuite>
+  <testsuite name="External Modules Manager" timestamp="2022-05-10T12:06:05" tests="1" time="0.7840" failures="0">
+    <testcase name="Test System Config External Modules Manager validates external modules" time="0.5150" classname="validates external modules">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -508,5 +508,147 @@ describe('Test External Modules', () => {
         //  TO DO MORE
     })
 
+    /**
+     * Orca Search Module
+     * Description: A configurable, searchable, and performant, list dashboard.
+     * 
+     * 
+     * @since 1.0.0
+     */
+    context('Orca Search Module', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Orca Search Module')
+        })
+
+        it('has record with field oid', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?page=orca_search&id=1&pid=' + data_em.em_test_pid)
+            cy.get('input[name="oid"]').clear().type('foo')
+            cy.get('#submit-btn-saverecord').click()
+        })
+
+        it('can search for oid', () => {
+            cy.visit(path_redcap + '/ExternalModules/?prefix=orca_search&page=search&pid='+ data_em.em_test_pid)
+            cy.get('#search-value').type("foo")
+            cy.get('#orca-search').click()
+            cy.get('.orca-search-content').should('have.text', 'foo');
+        })
+    })
+
+    /**
+     * Shazam
+     * Description: Shazam allows you to define a html template to rearrange the fields on a redcap form or survey instrument.
+     * 
+     * 
+     * @since 1.0.0
+     */
+     context('Shazam', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Shazam')
+        })
+
+        it('has basic HTML Output', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?page=shazam&id=1&pid=' + data_em.em_test_pid)
+            cy.get('#test-shazam-headline').should('have.text', 'Hello from Shazam');
+        })
+    })    
+    
+    /**
+     * Simple Ontology Module
+     * Description: Example implementation of Ontology Provider add in 8.8.1. 
+     * This module allows a site wide set of code/displays to defined and then referenced as an ontology.
+     * 
+     * @since 1.0.0
+     */
+    context('Simple Ontology Module', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Simple Ontology Module')
+        })
+
+        it('can enter Input from Dropdown', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?page=simple_ontology&id=1&pid=' + data_em.em_test_pid)
+            cy.get('#test_ontology-autosuggest-span').click()
+            cy.get('#test_ontology-autosuggest').type('foo')
+            cy.get('ul.ui-menu').not('#pdfExportDropdown').find('li.ui-menu-item a.ui-menu-item-wrapper').click()
+            cy.get('input[name="test_ontology"').should('have.value', 'Foo')
+        })
+    })
+
+    /**
+     * Unique Action Tag
+     * Description: A REDCap external module providing action tags that make fields unique in Data Entry.
+     * 
+     * @since 1.0.0
+     */
+     context('Unique Action Tag', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Unique Action Tag')
+        })
+
+        it('blocks duplicates for @UNIQUE', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
+            cy.get('input[name="unique"]').clear().type("foo1")
+            cy.get('body').click(0,0);
+            cy.get('#submit-btn-saverecord').click()
+
+            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)
+            cy.get('input[name="unique"]').clear().type("foo1")
+            cy.get('body').click(0,0);
+            cy.get('#suf_warning_dialog').should('be.visible')
+        })
+
+        it('blocks duplicates for @UNIQUE-STRICT (cross-record)', () => {
+            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
+            cy.get('input[name="unique_strict"]').clear().type("bar1")
+            cy.get('input[name="helper_unique_strict"').clear().type("bar2")
+            cy.get('body').click(0,0);
+            cy.get('#submit-btn-saverecord').click()
+
+            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)
+            cy.get('input[name="unique_strict"]').clear().type("bar2")
+            cy.get('body').click(0,0);
+            cy.get('#suf_warning_dialog').should('be.visible')
+        })
+
+        it('blocks duplicates for @UNIQUE-STRICT (same-record)', () => {
+            //  close warning
+            cy.get('[aria-describedby="suf_warning_dialog"] .ui-dialog-buttonpane button.ui-button').click()
+
+            cy.get('input[name="helper_unique_strict"').clear().type("bar3")
+            cy.get('input[name="unique_strict"]').clear().type("bar3")
+            cy.get('body').click(0,0);
+            cy.get('input[name="unique_strict"]').should('have.class', 'has-duplicate-warning')
+            cy.get('input[name="helper_unique_strict"]').should('have.class', 'has-duplicate-warning')
+        })
+    })
+
+
+    /**
+     * Address Auto Complete
+     * Description: Example implementation of Ontology Provider add in 8.8.1. 
+     * This module allows a site wide set of code/displays to defined and then referenced as an ontology.
+     * 
+     * @since 1.0.0
+     */
+     context.only('Address Auto Complete', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Address Auto Complete')
+        })
+
+        it('auto completes on Data Entry Page simple.', () => {
+            //cy.visit(path_redcap + '/DataEntry/index.php?page=address_auto_complete&id=1&pid=' + data_em.em_test_pid)
+        
+        })
+
+        it('auto completes on Data Entry Page advanced.', () => {
+            
+        })
+
+    })    
+
 })
 

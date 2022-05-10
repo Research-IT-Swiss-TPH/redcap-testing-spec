@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="2.2790" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2022-05-10T12:06:08" tests="0" file="cypress/integration/external_modules.spec.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Test External Modules" timestamp="2022-05-10T12:06:09" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Address Auto Complete" timestamp="2022-05-10T12:06:09" tests="3" time="0.8450" failures="0">
+    <testcase name="Test External Modules Address Auto Complete is enabled" time="1.9330" classname="is enabled">
+    </testcase>
+    <testcase name="Test External Modules Address Auto Complete auto completes on Data Entry Page simple." time="0.0210" classname="auto completes on Data Entry Page simple.">
+    </testcase>
+    <testcase name="Test External Modules Address Auto Complete auto completes on Data Entry Page advanced." time="0.0160" classname="auto completes on Data Entry Page advanced.">
+    </testcase>
+  </testsuite>
+</testsuites>

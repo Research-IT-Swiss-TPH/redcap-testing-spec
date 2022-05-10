@@ -22,6 +22,10 @@ Cypress.dayjs = dayjs
 import './commands'
 import './helpers'
 
+
+//  Import Reporter
+import 'cypress-mochawesome-reporter/register';
+
 //  <Spec Assertion Data>
 const data_em = require('../../data/external_modules.json')
 

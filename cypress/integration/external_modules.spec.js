@@ -589,25 +589,29 @@ describe('Test External Modules', () => {
         })
 
         it('blocks duplicates for @UNIQUE', () => {
-            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
+            cy.editRecordFor('unique_action_tag', 1)
+            //cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
             cy.get('input[name="unique"]').clear().type("foo1")
             cy.get('body').click(0,0);
             cy.get('#submit-btn-saverecord').click()
 
-            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)
+            cy.editRecordFor('unique_action_tag', 2)
+            //cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)            
             cy.get('input[name="unique"]').clear().type("foo1")
             cy.get('body').click(0,0);
             cy.get('#suf_warning_dialog').should('be.visible')
         })
 
         it('blocks duplicates for @UNIQUE-STRICT (cross-record)', () => {
-            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
+            cy.editRecordFor('unique_action_tag', 1)
+            //cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=1&pid=' + data_em.em_test_pid)
             cy.get('input[name="unique_strict"]').clear().type("bar1")
             cy.get('input[name="helper_unique_strict"').clear().type("bar2")
             cy.get('body').click(0,0);
             cy.get('#submit-btn-saverecord').click()
 
-            cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)
+            cy.editRecordFor('unique_action_tag', 2)
+            //cy.visit(path_redcap + '/DataEntry/index.php?page=unique_action_tag&id=2&pid=' + data_em.em_test_pid)
             cy.get('input[name="unique_strict"]').clear().type("bar2")
             cy.get('body').click(0,0);
             cy.get('#suf_warning_dialog').should('be.visible')
@@ -627,28 +631,217 @@ describe('Test External Modules', () => {
 
 
     /**
+     * Repeat Survey Link
+     * todo
+     * 
+     * @since 1.0.0
+     * 
+     */
+    context('Repeat Survey Link', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Repeat Survey Link')
+        })
+
+        it('links to next instance (1)', () => {            
+            cy.editRecordFor('base')
+            //cy.get('#submit-btn-savecontinue').click()
+            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
+                cy.visit(rsl)
+                cy.get('input[name="rsl_current_instance"]').should('have.value', 1)
+                cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
+            })
+        })
+
+        it('links to next instance (2)', () => {
+            //  Add first instance
+            cy.editRecordFor('repeat_survey_link')
+            cy.get('#submit-btn-saverecord').click()
+
+            cy.editRecordFor('base')
+            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
+                cy.visit(rsl)
+                cy.get('input[name="rsl_current_instance"]').should('have.value', 2)
+                cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
+            })
+        })
+    })
+
+
+
+    /**
+     * Export Data Dictionary Changes
+     * to do
+     * 
+     * @since 1.0.0
+     */
+
+    /**
      * Address Auto Complete
      * Description: Example implementation of Ontology Provider add in 8.8.1. 
      * This module allows a site wide set of code/displays to defined and then referenced as an ontology.
      * 
      * @since 1.0.0
      */
-     context.only('Address Auto Complete', () => {
+     context('Address Auto Complete', () => {
 
         it('is enabled', () => {
             cy.moduleIsEnabled('Address Auto Complete')
+
+            //  Set advanced_save = false in module configuration
+            cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
+            cy.get('tr[data-module="address_auto_complete"]').find('.external-modules-configure-button').click()
+            cy.get('input[name="enable-advanced-save"]').uncheck({force:true})
+            cy.saveModuleConfig();
+
         })
 
         it('auto completes on Data Entry Page simple.', () => {
-            //cy.visit(path_redcap + '/DataEntry/index.php?page=address_auto_complete&id=1&pid=' + data_em.em_test_pid)
-        
+           
+            cy.editRecordFor('address_auto_complete')
+            cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
+            cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
+            cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625');
+        })
+
+        it('auto completes on Survey Page simple', () => {
+            //  Logout + Open Survey
+            cy.get('input[name="aac_survey_url"]').invoke('val').then( (aac_survey_url) => {
+                cy.logout()
+                cy.visit(aac_survey_url)
+                cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
+                cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
+                cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+            })
         })
 
         it('auto completes on Data Entry Page advanced.', () => {
             
+            cy.login()
+            //  Set advanced_save = true in module configuration
+            cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
+            cy.get('tr[data-module="address_auto_complete"]').find('.external-modules-configure-button').click()
+            cy.get('input[name="enable-advanced-save"]').check({force:true})
+            cy.get('#external-modules-configure-modal').find('.modal-footer button.save').click()            
+
+            cy.editRecordFor('address_auto_complete')
+            cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
+            cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
+            
+            cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+            cy.get('input[name="aac_street_1"]').should('have.value', 'Kreuzstrasse')
+            cy.get('input[name="aac_number_1"]').should('have.value', '2')
+            cy.get('input[name="aac_code_1"]').should('have.value', '4123')
+            cy.get('input[name="aac_city_1"]').should('have.value', 'Allschwil')
         })
 
-    })    
+        it('auto completes on Survey Page advanced.', () => {
+            //  Logout + Open Survey
+            cy.get('input[name="aac_survey_url"]').invoke('val').then( (aac_survey_url) => {
+                cy.logout()
+                cy.visit(aac_survey_url)
+                cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
+                cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
+                
+                cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+                cy.get('input[name="aac_street_1"]').should('have.value', 'Kreuzstrasse')
+                cy.get('input[name="aac_number_1"]').should('have.value', '2')
+                cy.get('input[name="aac_code_1"]').should('have.value', '4123')
+                cy.get('input[name="aac_city_1"]').should('have.value', 'Allschwil')
+            })
+            cy.login()
+        })
+
+        it('can input Custom Address', () => {
+            cy.editRecordFor('address_auto_complete')
+            cy.get('#address-auto-complete-aac_field_1').type('foobar');
+            cy.get('#aac-custom-address-btn-aac_field_1').click()            
+            cy.get('#custom-address-modal',  { timeout: 10000 }).should('be.visible')
+            cy.wait(500)
+            cy.get('input#custom-street').type('custom street')            
+            cy.get('input#custom-number').type('custom number')
+            cy.get('input#custom-code').type('custom code')
+            cy.get('input#custom-city').type('custom city')
+            cy.get('input#custom-country').type('custom country')
+            cy.get('input#custom-note').type('custom note')
+
+
+            cy.get('#custom-address-form .modal-footer .btn-primary').click()
+
+            cy.get('input[name="aac_meta_1"]').should('have.value', '')
+            cy.get('input[name="aac_street_1"]').should('have.value', 'custom street')
+            cy.get('input[name="aac_number_1"]').should('have.value', 'custom number')
+            cy.get('input[name="aac_code_1"]').should('have.value', 'custom code')
+            cy.get('input[name="aac_city_1"]').should('have.value', 'custom city')
+            cy.get('input[name="aac_country_1"]').should('have.value', 'custom country')
+            cy.get('input[name="aac_note_1"]').should('have.value', 'custom note')
+
+        })
+    })
+
+    /**
+     * Record Home Dashboard
+     * todo
+     * 
+     * @since 1.0.0
+     */
+
+
+    /**
+     * Add Instance on Save
+     * todo
+     * 
+     * @since 1.0.0    
+     */
+     context.only('Add Instance on Save', () => {
+
+        it.only('is enabled', () => {
+            cy.moduleIsEnabled('Add Instance on Save')
+
+            cy.deleteRecord(1,148)
+            cy.editRecordFor('base',1,1,148)
+            cy.saveRecord()
+
+        })
+
+        it('add first instance on save in same project', () => {
+
+            const rndm = cy.helpers.getRandomString(10)
+
+            cy.editRecordFor('base')
+            cy.get('input[name="helper_aios"]').clear().type(rndm)
+            cy.saveRecord()
+
+            cy.editRecordFor('add_instance_on_save',1,1)
+            cy.get('input[name="aios_current_instance"]').should('have.value', 1)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', rndm)
+        })
+
+        it('add first instance on save in cross project', () => {
+            cy.editRecordFor('add_instance_on_save',1,1, 148)
+
+
+        })
+
+        it('add second instance on save in same project', () => {
+
+            const rndm = cy.helpers.getRandomString(10)
+
+            cy.editRecordFor('base')
+            cy.get('input[name="helper_aios"]').clear().type(rndm)
+            cy.saveRecord()
+
+            cy.editRecordFor('add_instance_on_save',1,2)
+            cy.get('input[name="aios_current_instance"]').should('have.value', 2)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', rndm)
+        })
+        
+        it('add first instance on save in cross project', () => {
+
+        })        
+
+
+    })
 
 })
 

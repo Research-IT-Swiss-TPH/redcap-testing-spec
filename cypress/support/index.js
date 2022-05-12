@@ -38,10 +38,12 @@ Cypress.Cookies.defaults({ preserve: "PHPSESSID" })
 //  Before all tests
 before(()=>{
     cy.login()
+    cy.eraseAllData()
 })
 
 //  After all tests
 after( ()=> {
     //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
+    cy.wait(500)
     cy.logout()
 })

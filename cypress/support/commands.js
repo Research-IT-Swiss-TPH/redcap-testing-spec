@@ -34,7 +34,7 @@ Cypress.Commands.add('login', () => {
     cy.get('input[name=username]').type(Cypress.env('username'))
     cy.get('input[name=password]').type(Cypress.env('password'))
     cy.get('button#login_btn').click()
-    cy.get('#username-reference').contains(Cypress.env('username'))
+    //cy.get('#username-reference').contains(Cypress.env('username'))
 })
 
 Cypress.Commands.add('logout', () => {    
@@ -47,8 +47,33 @@ Cypress.Commands.add('moduleIsEnabled', (name) => {
     cy.get('#external-modules-enabled').should("contain", name)         
 })
 
-Cypress.Commands.add('eraseAllData', (pid) => {
-    const path_project_setup = '/redcap_v' + Cypress.env('version') + '/ProjectSetup/other_functionality.php?pid=' + pid
+Cypress.Commands.add('editRecordFor', (instrument, record=1, instance=1, pid=data_em.em_test_pid) => {
+    cy.visit(path_redcap + '/DataEntry/index.php?page='+instrument+'&id='+record+'&pid=' + pid + '&instance=' + instance)
+})
+
+Cypress.Commands.add('deleteRecord', (record, pid=data_em.em_test_pid) => {
+    cy.visit(path_redcap + '/DataEntry/record_home.php?pid=' + pid + '&id='+record)
+    //  Only delete if there is a delete button
+    cy.get("body").then($body => {
+        if($body.find('#recordActionDropdownTrigger').length > 0) {
+            cy.get('#recordActionDropdownTrigger').click()
+            cy.get('#recordActionDropdown li a').contains('Delete record (all forms)').click()
+            cy.get('button.ui-button').contains('DELETE RECORD').click()
+        }
+    })
+   
+})
+
+Cypress.Commands.add('saveRecord', () => {
+    cy.get('#submit-btn-saverecord').click()
+})
+
+Cypress.Commands.add('saveModuleConfig', () => {
+    cy.get('#external-modules-configure-modal').find('.modal-footer button.save').click()
+})
+
+Cypress.Commands.add('eraseAllData', () => {
+    const path_project_setup = '/redcap_v' + Cypress.env('version') + '/ProjectSetup/other_functionality.php?pid=' + data_em.em_test_pid
     cy.visit(path_project_setup)
     cy.get('#row_erase button').click()
     cy.get('button.ui-button').contains("Erase all data").click()    

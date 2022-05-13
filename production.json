@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://redcap-dev.swisstph.ch/redcap/",
+  "baseUrl": "",
 
   "experimentalInteractiveRunEvents": true,
   "testFiles": [
@@ -12,7 +12,7 @@
     "cypressMochawesomeReporterReporterOptions": {  
       "reportDir": "cypress/reports",  
       "charts": true,  
-      "reportPageTitle": "REDCap Testing DEV",  
+      "reportPageTitle": "REDCap Testing PROD",  
       "embeddedScreenshots": true,  
       "inlineAssets": true  
     },  

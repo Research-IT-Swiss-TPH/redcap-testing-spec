@@ -35,7 +35,7 @@ module.exports = (on, config) => {
   on('after:run', async () => {  
       console.log('override after:run');  
       //if you are using other than Windows remove below line starts with await exec  
-      await exec("npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml");  
+      await exec("npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml");     
       await afterRunHook();  
   });  
 }

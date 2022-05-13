@@ -215,65 +215,32 @@ describe('Test External Modules', () => {
             cy.get('input[name="future"]').type(Cypress.dayjs().subtract(1, 'year').format('DD-MM-YYYY'))
             cy.get('#label-future').click()
             cy.get('#redcapValidationErrorPopup').contains('The value you provided is outside the suggested range.')
-            cy.get('.ui-dialog-buttonset').click()
+            cy.get('.ui-dialog-buttonset').contains("Close").click()
         })
 
         it('validates @NOTPAST', () => {            
             cy.get('input[name="not_past"]').type(Cypress.dayjs().subtract(1, 'year').format('DD-MM-YYYY'))
             cy.get('#label-not_past').click()
             cy.get('#redcapValidationErrorPopup').contains('The value you provided is outside the suggested range.')
-            cy.get('.ui-dialog-buttonset').click()
+            cy.get('.ui-dialog-buttonset').contains("Close").click()
         })
 
         it('validates @PAST', () => {            
             cy.get('input[name="past"]').type(Cypress.dayjs().add(1, 'year').format('DD-MM-YYYY'))
             cy.get('#label-past').click()
             cy.get('#redcapValidationErrorPopup').contains('The value you provided is outside the suggested range.')
-            cy.get('.ui-dialog-buttonset').click()
+            cy.get('.ui-dialog-buttonset').contains("Close").click()
         })
         
         it('validates @NOTFUTURE', () => {            
             cy.get('input[name="not_future"]').type(Cypress.dayjs().add(1, 'year').format('DD-MM-YYYY'))
             cy.get('#label-not_future').click()
             cy.get('#redcapValidationErrorPopup').contains('The value you provided is outside the suggested range.')
-            cy.get('.ui-dialog-buttonset').click()
-        })    
-
-    })
-
-    /**
-     * Form Render Skip Logic
-     * Description: This module hides and shows instruments based on the values of REDCap form fields.
-     * 
-     * Uses condiiton "base/helper_frsl > 21"
-     * Notice: Does not cover survey mode.
-     * 
-     * @since 1.0.0
-     */
-
-    /* context('Form Render Skip Logic', () => {
-
-        it('is enabled', () => {
-            cy.moduleIsEnabled('Form Render Skip Logic')
-        })
-
-        it('skips form for empty value', () => {
-            cy.visit(path_redcap + '/DataEntry/index.php?pid='+data_em.em_test_pid+'&id=1&page=form_render_skip_logic')
-            cy.url().should('not.contain', 'page=form_render_skip_logic')
-            
-        })
-
-        it('includes form for valid value', () => {
-            cy.visit(path_redcap + '/DataEntry/index.php?pid='+data_em.em_test_pid+'&id=1&page=base')
-            cy.get('input[name="helper_frsl"]').type(22)
-            cy.get('#submit-btn-saverecord').click()
-
-            cy.visit(path_redcap + '/DataEntry/index.php?pid='+data_em.em_test_pid+'&id=1&page=form_render_skip_logic')
-            cy.url().should('include', '/DataEntry/index.php?pid='+data_em.em_test_pid+'&id=1&page=form_render_skip_logic')
+            cy.get('.ui-dialog-buttonset').contains("Close").click()
         })
 
     })
- */
+
     /**
      * Instance Table
      * Description: Use the action tag @INSTANCETABLE=form_name in a descriptive text field to include a table showing data from repeat instances of that form.
@@ -489,11 +456,18 @@ describe('Test External Modules', () => {
      */
     context('Data Quality API', () => {
 
+        let dq
+
         it('is enabled', () => {
             cy.moduleIsEnabled('Data Quality API')
+            cy.editRecordFor('base')
+            cy.saveRecordAndStay()
+            cy.get('#dc-icon-helper_data_quality_api').click()
+            cy.get('#dc-comment').clear().type('foo-dq_api')
+            cy.get('#dataResSavBtn').click()
         })
 
-        it('is connecting', () => {
+        it('exports data quality', () => {
             cy.request({
                 url: path_api + '?NOAUTH&type=module&prefix=data_quality_api&page=export&pid='+data_em.em_test_pid,
                 method: 'POST',
@@ -501,12 +475,58 @@ describe('Test External Modules', () => {
                 failOnStatusCode: false,
                 body: 'token='+api_token
             }).then((res) => {
-                expect(JSON.parse(res.body).length).to.eq(0)                
+                var obj = JSON.parse(res.body)
+                dq = obj
+                var o = obj[Object.keys(obj)[0]]
+                var reso = o.resolutions
+                var r = reso[Object.keys(reso)[0]]
+                expect(r.comment).to.eq("foo-dq_api")
             })
         })
 
-        //  TO DO MORE
+        it('imports data quality', () => {
+
+            var obj
+            obj = dq
+            var o = obj[Object.keys(obj)[0]]
+            var reso = o.resolutions
+            var r = reso[Object.keys(reso)[0]]
+            r.ts = "1990-01-01 00:00:00"
+            r.comment = "Hello World"
+
+            cy.request({
+                url: path_api + '?NOAUTH&type=module&prefix=data_quality_api&page=import&pid='+data_em.em_test_pid,
+                method: 'POST',
+                form: true,
+                failOnStatusCode: false,
+                body: 'token='+api_token + '&data=' + JSON.stringify(obj)
+            }).then((res) => {
+                var id = JSON.parse(res.body)[0]
+                cy.editRecordFor('base')
+                cy.get('#dc-icon-helper_data_quality_api').click()
+                cy.get('#res_id-'+id).should("contain", "Hello World")
+            })
+        })
     })
+
+    /**
+     * Data Resolution Workflow Tweaks
+     * Shows/hides "Verify all fields" button
+     * 
+     * @since 1.0.0
+     */
+     context('Data Resolution Workflow Tweaks', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Data Resolution Workflow Tweaks')
+        })
+
+        it('shows "Verify all fields" button', () => {
+            cy.editRecordFor('base')
+            cy.get('button#MCRI_DRWTweaks_Button').should('be.visible')
+        })
+
+    })    
 
     /**
      * Orca Search Module
@@ -577,6 +597,45 @@ describe('Test External Modules', () => {
     })
 
     /**
+     * Vizr
+     * Vizr provides a way for project designers to create charts summarizing 
+     * their data in a time series fashion to provide additional insights about their project.
+     * 
+     * @since 1.0.0
+     * 
+     */
+    context('Vizr', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Vizr')
+
+            //  add vizr record
+            cy.editRecordFor('vizr')
+            cy.get('#vizr_date-tr td button').click()
+            cy.saveRecord()
+        })
+
+        it('renders chart', () => {
+            cy.visit( path_redcap + '/ExternalModules/?prefix=vizr&page=index&pid=' + data_em.em_test_pid)
+            cy.get('.vizr-charts canvas').should('be.visible')
+            cy.get('.vizr-chart-summary table tbody tr td').first().should('have.text', 1)
+        })
+
+    })
+
+    /**
+     * Custom Participant Export
+     * A simple external module for REDCap that enables custom participant export to CSV. 
+     * 
+     * 
+     * ☐ Custom Export 
+     * ☐ Edit configuration
+     * 
+     * @since 1.0.0
+     */
+    
+
+    /**
      * Unique Action Tag
      * Description: A REDCap external module providing action tags that make fields unique in Data Entry.
      * 
@@ -643,21 +702,13 @@ describe('Test External Modules', () => {
             cy.moduleIsEnabled('Repeat Survey Link')
         })
 
-        it('links to next instance (1)', () => {            
-            cy.editRecordFor('base')
-            //cy.get('#submit-btn-savecontinue').click()
-            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
-                cy.visit(rsl)
-                cy.get('input[name="rsl_current_instance"]').should('have.value', 1)
-                cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
-            })
-        })
-
-        it('links to next instance (2)', () => {
-            //  Add first instance
+        it('links to next instance (1=>2)', () => {     
+            
+            //  Add instance 1
             cy.editRecordFor('repeat_survey_link')
-            cy.get('#submit-btn-saverecord').click()
+            cy.saveRecord()
 
+            //  Check first rsl
             cy.editRecordFor('base')
             cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
                 cy.visit(rsl)
@@ -665,6 +716,22 @@ describe('Test External Modules', () => {
                 cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
             })
         })
+
+        it('links to next instance (2=>3)', () => {     
+            
+            //  Add instance 1
+            cy.editRecordFor('repeat_survey_link',1,2)
+            cy.saveRecord()
+
+            //  Check first rsl
+            cy.editRecordFor('base')
+            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
+                cy.visit(rsl)
+                cy.get('input[name="rsl_current_instance"]').should('have.value', 3)
+                cy.get('input[name="rsl_last_instance"]').should('have.value', 2)
+            })
+        })
+
     })
 
 
@@ -701,7 +768,10 @@ describe('Test External Modules', () => {
             cy.editRecordFor('address_auto_complete')
             cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
             cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
-            cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625');
+
+            cy.get('input[name="aac_meta_1"]').should(($meta) => {
+                expect($meta.val()).to.contain('608402.1875, 267696.15625')
+            });
         })
 
         it('auto completes on Survey Page simple', () => {
@@ -711,7 +781,7 @@ describe('Test External Modules', () => {
                 cy.visit(aac_survey_url)
                 cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
                 cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
-                cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+                cy.get('input[name="aac_meta_1"]').should('contain.value', '608402.1875, 267696.15625')
             })
         })
 
@@ -722,13 +792,13 @@ describe('Test External Modules', () => {
             cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
             cy.get('tr[data-module="address_auto_complete"]').find('.external-modules-configure-button').click()
             cy.get('input[name="enable-advanced-save"]').check({force:true})
-            cy.get('#external-modules-configure-modal').find('.modal-footer button.save').click()            
+            cy.get('#external-modules-configure-modal').find('.modal-footer button.save').click()
 
             cy.editRecordFor('address_auto_complete')
             cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
             cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
             
-            cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+            cy.get('input[name="aac_meta_1"]').should('contain.value', '608402.1875, 267696.15625')
             cy.get('input[name="aac_street_1"]').should('have.value', 'Kreuzstrasse')
             cy.get('input[name="aac_number_1"]').should('have.value', '2')
             cy.get('input[name="aac_code_1"]').should('have.value', '4123')
@@ -743,7 +813,7 @@ describe('Test External Modules', () => {
                 cy.get('#address-auto-complete-aac_field_1').type('Kreuzstrasse 2, 4123');
                 cy.get('ul.ui-autocomplete').find('li.ui-menu-item .ui-menu-item-wrapper').first().click()
                 
-                cy.get('input[name="aac_meta_1"]').should('have.value', '390075, 608402.1875, 267696.15625')
+                cy.get('input[name="aac_meta_1"]').should('contain.value', '608402.1875, 267696.15625')
                 cy.get('input[name="aac_street_1"]').should('have.value', 'Kreuzstrasse')
                 cy.get('input[name="aac_number_1"]').should('have.value', '2')
                 cy.get('input[name="aac_code_1"]').should('have.value', '4123')
@@ -753,18 +823,21 @@ describe('Test External Modules', () => {
         })
 
         it('can input Custom Address', () => {
+            //  Presumes that "Custom Address" is enabled
             cy.editRecordFor('address_auto_complete')
-            cy.get('#address-auto-complete-aac_field_1').type('foobar');
-            cy.get('#aac-custom-address-btn-aac_field_1').click()            
-            cy.get('#custom-address-modal',  { timeout: 10000 }).should('be.visible')
+            cy.get('#address-auto-complete-aac_field_1').type('foobar')
+            cy.get('#aac-status-aac_field_1').should('contain.text', 'Nothing found.')
+            cy.get('#aac-custom-address-btn-aac_field_1').should('be.visible').click()
+            cy.wait(1500)
+            cy.get('#custom-address-modal').should('be.visible')
             cy.wait(500)
+            //  Presumes that advanced save is enabled
             cy.get('input#custom-street').type('custom street')            
             cy.get('input#custom-number').type('custom number')
-            cy.get('input#custom-code').type('custom code')
             cy.get('input#custom-city').type('custom city')
+            cy.get('input#custom-code').type('custom code')
             cy.get('input#custom-country').type('custom country')
             cy.get('input#custom-note').type('custom note')
-
 
             cy.get('#custom-address-form .modal-footer .btn-primary').click()
 
@@ -789,59 +862,104 @@ describe('Test External Modules', () => {
 
     /**
      * Add Instance on Save
-     * todo
+     * Add new instance to a record of a repeating instance by saving any field on any project. 
+     * Additionally, define piping fields to set the initial values of fields within the newly added instance.
      * 
      * @since 1.0.0    
      */
-     context.only('Add Instance on Save', () => {
+     context('Add Instance on Save', () => {
 
-        it.only('is enabled', () => {
+        it('is enabled', () => {
             cy.moduleIsEnabled('Add Instance on Save')
 
-            cy.deleteRecord(1,148)
-            cy.editRecordFor('base',1,1,148)
+            //  Reset record=1 and add clean record to be in sync with #test EM project
+            cy.deleteRecord(1, data_em.cross_test_pid)
+            cy.editRecordFor('base',1,1, data_em.cross_test_pid)
             cy.saveRecord()
 
+            //  Trigger AIOS
+            cy.editRecordFor('base')
+            cy.get('input[name="helper_aios"]').clear().type('test-aios-input')
+            cy.saveRecord()
         })
 
         it('add first instance on save in same project', () => {
-
-            const rndm = cy.helpers.getRandomString(10)
-
-            cy.editRecordFor('base')
-            cy.get('input[name="helper_aios"]').clear().type(rndm)
-            cy.saveRecord()
-
             cy.editRecordFor('add_instance_on_save',1,1)
             cy.get('input[name="aios_current_instance"]').should('have.value', 1)
-            cy.get('input[name="aios_pipe_target"]').should('have.value', rndm)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', 'test-aios-input')
         })
 
         it('add first instance on save in cross project', () => {
-            cy.editRecordFor('add_instance_on_save',1,1, 148)
+            cy.editRecordFor('add_instance_on_save',1,1, data_em.cross_test_pid)
+            cy.get('input[name="aios_current_instance"]').should('have.value', 1)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', 'test-aios-input')
+        })
+    })
 
+
+    /**
+     * Cross-Project Piping
+     * 
+     * 
+     * @since 1.0.0
+     */
+    context('Cross-Project Piping', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Cross-Project Piping')
 
         })
 
-        it('add second instance on save in same project', () => {
-
-            const rndm = cy.helpers.getRandomString(10)
-
+        it('pipes all records on button click', () => {
+            //  Reset EM project
+            cy.deleteRecord(1)
             cy.editRecordFor('base')
-            cy.get('input[name="helper_aios"]').clear().type(rndm)
             cy.saveRecord()
 
-            cy.editRecordFor('add_instance_on_save',1,2)
-            cy.get('input[name="aios_current_instance"]').should('have.value', 2)
-            cy.get('input[name="aios_pipe_target"]').should('have.value', rndm)
+            //  Reset Cross Project
+            cy.deleteRecord(1, data_em.cross_test_pid)
+            cy.editRecordFor('crossproject_piping',1,1, data_em.cross_test_pid)
+
+            //  Trigger CCP
+            cy.get('input[name="ccp_source"]').type('foo-cpp')
+            cy.saveRecord()
+            cy.visit(path_redcap + '/DataEntry/record_status_dashboard.php?pid=' + data_em.em_test_pid)
+            cy.get('#pipe_all_records').click()
+
+            //  Check piping
+            cy.editRecordFor('crossproject_piping')
+            cy.get('input[name="cpp_target"]').should('have.value', 'foo-cpp')
         })
-        
-        it('add first instance on save in cross project', () => {
-
-        })        
-
 
     })
+
+    /**
+     * 
+     * Date Calculated Fields
+     * Allows for piping from date fields to other date fields, regardless of format. 
+     * Can pipe data across events within a REDCap project.
+     * 
+     * @since 1.0.0
+     */
+    context('Date Calculated Fields', () => {
+
+        it('is enabled', () => {
+            cy.moduleIsEnabled('Date Calculated Fields')
+            cy.editRecordFor('date_calculated_fields')
+            cy.get('input[name="dcf_source"]').type('13-05-2022')
+            cy.get('body').click(0,0)
+        })
+
+        it('adds 1 day', () => {
+            cy.get('input[name="dcf_target_1"]').should('have.value', '13-05-2022')
+        })
+
+        it('adds 1 month', () => {
+            cy.get('input[name="dcf_target_2"]').should('have.value', '12-06-2022')
+        })
+    }) 
+
+
 
 })
 

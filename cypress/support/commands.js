@@ -68,6 +68,11 @@ Cypress.Commands.add('saveRecord', () => {
     cy.get('#submit-btn-saverecord').click()
 })
 
+Cypress.Commands.add('saveRecordAndStay', () => {
+    cy.get('body').click(0,0);
+    cy.get('#submit-btn-savecontinue').click()
+})
+
 Cypress.Commands.add('saveModuleConfig', () => {
     cy.get('#external-modules-configure-modal').find('.modal-footer button.save').click()
 })

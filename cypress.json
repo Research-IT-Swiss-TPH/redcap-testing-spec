@@ -19,5 +19,7 @@
       "mochaFile": "cypress/reports/junit/results-[hash].xml"  
     }  
   },  
-  "video": false
+  "video": false,
+  "viewportWidth": 1200,
+  "viewportHeight": 1400
 }

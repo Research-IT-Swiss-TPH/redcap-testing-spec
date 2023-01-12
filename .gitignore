@@ -1,3 +1,5 @@
 cypress.env.json
+cypress.env-prod.json
+cypress.env-dev.json
 node_modules
 cypress/reports/

@@ -12,3 +12,9 @@ Open in Cypress Client:
 
 Headless with calling reports:
 `.\node_modules\.bin\cypress run`
+
+
+Permissions:
+
+Directory /cypress/downloads needs to be writable
+Directory /cypress/fixtures needs to be readable

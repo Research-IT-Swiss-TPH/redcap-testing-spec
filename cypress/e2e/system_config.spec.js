@@ -6,7 +6,8 @@
 
 
 //  <Spec Assertion Data>
-const data_system_config = require('../../data/system_config.json')
+
+const data_system_config = require('../../data/dev/system_config.json')
 
 //  <paths>
 const path_redcap = '/redcap_v' + Cypress.env('version')

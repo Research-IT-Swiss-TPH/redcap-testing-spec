@@ -4,7 +4,7 @@
 //  external modules
 
 //  <Spec Assertion Data>
-const data_project_config = require('../../data/project_config.json')
+const data_project_config = require('../../data/dev/project_config.json')
 
 //  <paths>
 const path_redcap = '/redcap_v' + Cypress.env('version')

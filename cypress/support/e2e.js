@@ -13,6 +13,10 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+
+//  Globals
+window.global_keepdata=false;
+
 //  Additional Node Packages
 const dayjs = require('dayjs')
 Cypress.dayjs = dayjs
@@ -27,7 +31,7 @@ import './helpers'
 import 'cypress-mochawesome-reporter/register';
 
 //  <Spec Assertion Data>
-const data_em = require('../../data/external_modules.json')
+//const data_em = require('../../data/dev/external_modules.json')
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -37,13 +41,44 @@ Cypress.Cookies.defaults({ preserve: "PHPSESSID" })
 
 //  Before all tests
 before(()=>{
+
+    
+    console.log("process")
+    console.log(process.argv)
+
     cy.login()
-    cy.eraseAllData()
+    if(!window.global_keepdata) {
+        cy.eraseAllData()
+    }
+
+    //  Delete older assets
+    const downloadsFolder = Cypress.config("downloadsFolder")
+    cy.task('deleteFolder', {__dirname: downloadsFolder})
+
+    const ALLOW_BEFORE = process.env.ALLOW_BEFORE
+
+    if(ALLOW_BEFORE) {
+
+
+    }
+
+
+
 })
 
 //  After all tests
 after( ()=> {
-    //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
-    cy.wait(500)
-    cy.logout()
+
+            //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
+            cy.wait(500)
+            cy.logout()
+            
+    const ALLOW_AFTER = process.env.ALLOW_AFTER
+
+    if(ALLOW_AFTER) {
+
+
+
+    }
+
 })

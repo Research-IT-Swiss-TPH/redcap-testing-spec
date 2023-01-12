@@ -20,12 +20,13 @@
 //  https://dev.to/ganeshsirsi/how-to-generate-both-junit-xml-and-html-reports-in-cypress-step-by-step-guide-4dgd
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');  
 const exec = require('child_process').execSync;  
+const fs = require('fs');
 
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   on('before:run', async (details) => {  
-    console.log('override before:run');  
+    console.log('override before:run');
     await beforeRunHook(details);  
     //If you are using other than Windows remove below two lines  
     await exec("IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots")  
@@ -37,5 +38,15 @@ module.exports = (on, config) => {
       //if you are using other than Windows remove below line starts with await exec  
       await exec("npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml");     
       await afterRunHook();  
-  });  
+  });
+
+  on('task', {
+
+    readdir({ path }) {
+      return fs.readdir(path)
+    },
+
+
+  });
+
 }

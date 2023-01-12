@@ -4,26 +4,33 @@
   "description": "Testing Specification for the REDCap Dev Server.",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^9.6.0",
-    "cypress-file-upload": "^5.0.8",
     "cypress-mochawesome-reporter": "^3.0.1",
     "cypress-multi-reporters": "^1.6.0",
     "dayjs": "^1.10.7",
+    "html-pdf": "^3.0.1",
     "junit-report-merger": "^3.0.5",
     "mocha": "^10.0.0",
     "mocha-junit-reporter": "^2.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^10.11.0"
+  },
   "scripts": {
-    "dev": "./node_modules/.bin/cypress run",
-    "prod": "./node_modules/.bin/cypress run --config-file production.json"
+    "local": "npx cypress run --headed",
+    "dev": "npx cypress run --headed --config baseUrl=https://redcap-dev.swisstph.ch/redcap",
+    "dev:open": "npx cypress open --config baseUrl=https://redcap-dev.swisstph.ch/redcap",
+    "test": "SET NODE_ENV=development & node test.js",
+    "prod": "npx cypress run --headed --config baseUrl=https://redcap.swisstph.ch/redcap",
+    "prod:open": "npx cypress open --config baseUrl=https://redcap.swisstph.ch/redcap"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tertek/redcap-dev-spec.git"
   },
   "keywords": [
-    "cypress"
+    "Cypress",
+    "REDCap",
+    "Automated Testing"
   ],
   "author": "Ekin Tertemiz",
   "license": "ISC",

@@ -24,9 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import 'cypress-file-upload';
 
-const data_em = require('../../data/external_modules.json')
+const data_em = require('../../data/dev/external_modules.json')
 const path_redcap = '/redcap_v' + Cypress.env('version')
 
 Cypress.Commands.add('login', () => {
@@ -45,6 +44,10 @@ Cypress.Commands.add('logout', () => {
 Cypress.Commands.add('moduleIsEnabled', (name) => {
     cy.visit(path_redcap + '/ExternalModules/manager/project.php?pid=' + data_em.em_test_pid)
     cy.get('#external-modules-enabled').should("contain", name)         
+})
+
+Cypress.Commands.add('visitRecordHomePage', (record=1) => {
+    cy.visit( path_redcap + '/DataEntry/record_home.php?arm=1&id='+ record +'&pid=' + data_em.em_test_pid )
 })
 
 Cypress.Commands.add('editRecordFor', (instrument, record=1, instance=1, pid=data_em.em_test_pid) => {
@@ -82,4 +85,33 @@ Cypress.Commands.add('eraseAllData', () => {
     cy.visit(path_project_setup)
     cy.get('#row_erase button').click()
     cy.get('button.ui-button').contains("Erase all data").click()    
+})
+
+Cypress.Commands.add('downloadFromUrl', (url, filename=cy.helpers.getRandomString(10) + ".pdf") => {
+    fetch(url)
+    .then((res) => { return res.blob()})
+    .then((data) => {
+        var a = document.createElement("a")
+        a.href= window.URL.createObjectURL(data)
+        a.download = filename
+        a.click()
+    })
+})
+
+Cypress.Commands.add('compareFiles', (file_local, file_download, deep=false) => {
+
+    cy.fixture(file_local).then(localContent => {
+        const downloadsFolder = Cypress.config("downloadsFolder")
+        const downloadPath = `${downloadsFolder}/${file_download}`
+        cy.readFile(downloadPath).then(downloadedContent => { 
+
+        if(deep) {
+            expect(downloadedContent).to.deep.eq(localContent) 
+        } else {
+            expect(downloadedContent).equals(localContent)   
+        }
+
+        })
+      })
+
 })

@@ -13,7 +13,7 @@
     "mocha-junit-reporter": "^2.0.2"
   },
   "devDependencies": {
-    "cypress": "^10.11.0"
+    "cypress": "^12.3.0"
   },
   "scripts": {
     "local": "npx cypress run --headed",

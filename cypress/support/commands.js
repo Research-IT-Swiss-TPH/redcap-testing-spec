@@ -25,15 +25,25 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-const data_em = require('../../data/dev/external_modules.json')
+//  Variables for different environments (such as PIDs, etc.)
+//  LOCAL
+//  const data_em = require('../../data/local/external_modules.json')
+
+//  DEV
+//const data_em = require('../../data/dev/external_modules.json')
+
+//  PROD
+const data_em = require('../../data/prod/external_modules.json')
+
 const path_redcap = '/redcap_v' + Cypress.env('version')
 
-Cypress.Commands.add('login', () => {
-    cy.visit('/')
-    cy.get('input[name=username]').type(Cypress.env('username'))
-    cy.get('input[name=password]').type(Cypress.env('password'))
-    cy.get('button#login_btn').click()
-    //cy.get('#username-reference').contains(Cypress.env('username'))
+Cypress.Commands.add('login', (username, password) => {
+    cy.session('performLogin', () => {
+        cy.visit('/')
+        cy.get('input[name=username]').type(username)
+        cy.get('input[name=password]').type(password)
+        cy.get('button#login_btn').click()
+    })
 })
 
 Cypress.Commands.add('logout', () => {    

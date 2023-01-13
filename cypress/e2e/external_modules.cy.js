@@ -3,20 +3,15 @@
 const { interfaces } = require("mocha")
 
 //  <Spec Assertion Data>
-let ex_path_conf = "external_modules"
-let env_dir = "prod"
-
 //  Variables for different environments (such as PIDs, etc.)
 //  LOCAL
-//  const data_em = require('../../data/local/'+ex_path_conf+'.json')
+//  const data_em = require('../../data/local/external_modules.json')
 
 //  DEV
-const data_em = require('../../data/dev/'+ex_path_conf+'.json')
-//  cypress, Cypress1234
+//const data_em = require('../../data/dev/external_modules.json')
 
 //  PROD
-//const data_em = require('../../data/prod/'+ex_path_conf+'.json')
-//  cypress_redcap_prod, cypress1234A
+const data_em = require('../../data/prod/external_modules.json')
 
 //  <paths>
 const path_redcap = '/redcap_v' + Cypress.env('version')
@@ -24,7 +19,6 @@ const path_api = '/api/'
 const api_token = Cypress.env('api_token')
 
 describe('Test External Modules', () => {
-
 
     /**
      * Auto Record Generation

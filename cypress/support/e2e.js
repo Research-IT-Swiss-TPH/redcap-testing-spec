@@ -30,14 +30,7 @@ import './helpers'
 //  Import Reporter
 import 'cypress-mochawesome-reporter/register';
 
-//  <Spec Assertion Data>
-//const data_em = require('../../data/dev/external_modules.json')
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
 //  Persist session cookie
-Cypress.Cookies.defaults({ preserve: "PHPSESSID" })
 
 //  Before all tests
 before(()=>{
@@ -46,10 +39,11 @@ before(()=>{
     console.log("process")
     console.log(process.argv)
 
-    cy.login()
-    if(!window.global_keepdata) {
-        cy.eraseAllData()
-    }
+    // cy.login(Cypress.env('username'), Cypress.env('password'))
+    
+    // if(!window.global_keepdata) {
+    //     cy.eraseAllData()
+    // }
 
     //  Delete older assets
     const downloadsFolder = Cypress.config("downloadsFolder")
@@ -61,17 +55,18 @@ before(()=>{
 
 
     }
+})
 
-
-
+beforeEach(()=>{
+    cy.login(Cypress.env('username'), Cypress.env('password'))
 })
 
 //  After all tests
 after( ()=> {
 
-            //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
-            cy.wait(500)
-            cy.logout()
+    //cy.eraseAllData(data_em.em_test_pid)    // erase all data to be safe...
+    cy.wait(500)
+    cy.logout()
             
     const ALLOW_AFTER = process.env.ALLOW_AFTER
 

@@ -9,14 +9,16 @@ Cypress project for redcap testing:
 ## Setup
 
 Clone repository:
-`git clone https://github.com/tertek/redcap-dev-spec.git`
-`cd redcap-dev-spec`
+```bash
+git clone https://github.com/tertek/redcap-dev-spec.git
+cd redcap-dev-spec
+```
 
-Install npm dependencies:
-`npm install`
-
-Install Cypress Client:
-`.\node_modules\.bin\cypress install`
+Install npm dependencies and Cypress client:
+```bash
+npm install
+.\node_modules\.bin\cypress install
+```
 
 ## Configure
 
@@ -31,22 +33,26 @@ for example:
 }
 ```
 
-## 
+Ensure required permissions are set within project directory:
+- Directory /cypress/downloads needs to be writable
+- Directory /cypress/fixtures needs to be readable
 
-How to use
-
+## Usage
 
 Open in Cypress Client:
-`.\node_modules\.bin\cypress open`
+```bash
+.\node_modules\.bin\cypress open
+```
 
-Headless with calling reports:
-`.\node_modules\.bin\cypress run`
+Headless with calling reports::
+```bash
+.\node_modules\.bin\cypress run
+```
 
-In case of errors, clear cache with:
-`.\node_modules\.bin\cypress cache clear`
+## Troublshooting
+In case of errors, clear cache:
+```bash
+.\node_modules\.bin\cypress cache clear
+```
 
 
-Permissions:
-
-Directory /cypress/downloads needs to be writable
-Directory /cypress/fixtures needs to be readable

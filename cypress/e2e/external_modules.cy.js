@@ -2,25 +2,14 @@
 
 const { interfaces } = require("mocha")
 
-//  <Spec Assertion Data>
-let ex_path_conf = "external_modules"
-let env_dir = "prod"
-
-//  Variables for different environments (such as PIDs, etc.)
-//  LOCAL
-//  const data_em = require('../../data/local/'+ex_path_conf+'.json')
-
-//  DEV
-const data_em = require('../../data/dev/'+ex_path_conf+'.json')
-//  cypress, Cypress1234
-
-//  PROD
-//const data_em = require('../../data/prod/'+ex_path_conf+'.json')
-//  cypress_redcap_prod, cypress1234A
-
 //  <paths>
+const data_em = require('../../data/' + Cypress.env('environment') + '/external_modules.json')
 const path_redcap = '/redcap_v' + Cypress.env('version')
 const path_api = '/api/'
+
+const path_pdfi_document_from = "pdfi_inj_document_from_" + +Cypress.env('environment') + ".pdf"
+const path_pdfi_document_down = "test_pdfi_1.pdf"
+
 const api_token = Cypress.env('api_token')
 
 describe('Test External Modules', () => {
@@ -579,11 +568,11 @@ describe('Test External Modules', () => {
 
             cy.get("#formSaveTip button").click()
             cy.get('#formSaveTip .dropdown-menu.show a').should("have.attr", "href").then((href) => {
-                cy.downloadFromUrl(href, "test_1.pdf")
+                cy.downloadFromUrl(href, path_pdfi_document_down)
             })
 
-            const _fileLocal = "pdfi_inj_document_from_" + env_dir + ".pdf"
-            const _fileDownl = "test_1.pdf"
+            const _fileLocal = path_pdfi_document_from
+            const _fileDownl = path_pdfi_document_down
 
             cy.compareFiles(_fileLocal, _fileDownl)
 

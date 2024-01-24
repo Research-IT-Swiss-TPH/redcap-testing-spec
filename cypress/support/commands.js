@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-const data_em = require('../../data/dev/external_modules.json')
+const data_em = require('../../data/'+Cypress.env('environment')+'/external_modules.json')
 const path_redcap = '/redcap_v' + Cypress.env('version')
 
 Cypress.Commands.add('login', () => {

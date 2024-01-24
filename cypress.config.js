@@ -28,7 +28,7 @@ module.exports = defineConfig({
   viewportHeight: 980,
   //  downloadsFolder: /your/custom/path,
   e2e: {
-    baseUrl: 'https://localhost/redcap/',
+    baseUrl: 'http://redcap-local.test/redcap/',
     specPattern: 'cypress/e2e/*.cy.js',
 
     // We've imported your old cypress plugins here.

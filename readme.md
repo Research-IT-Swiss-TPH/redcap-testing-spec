@@ -10,7 +10,7 @@ Cypress project for redcap testing:
 
 Clone repository:
 ```bash
-git clone https://github.com/tertek/redcap-dev-spec.git
+git clone https://github.com/tertek/redcap-testing-spec.git
 cd redcap-dev-spec
 ```
 

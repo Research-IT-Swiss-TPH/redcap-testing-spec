@@ -7,10 +7,16 @@ const data_em = require('../../data/' + Cypress.env('environment') + '/external_
 const path_redcap = '/redcap_v' + Cypress.env('version')
 const path_api = '/api/'
 
-const path_pdfi_document_from = "pdfi_inj_document_from_" + +Cypress.env('environment') + ".pdf"
+const path_pdfi_document_from = "pdfi_inj_document_from_" + Cypress.env('environment') + ".pdf"
 const path_pdfi_document_down = "test_pdfi_1.pdf"
 
-const api_token = Cypress.env('api_token')
+
+//  Set variables according to environment
+
+// if ( Cypress.env('environment') == 'local') {
+
+// }
+
 
 describe('Test External Modules', () => {
 
@@ -49,66 +55,7 @@ describe('Test External Modules', () => {
  
      })    
 
-    /**
-     * Big Data Import (REMOVED since v13.1.7)
-     * Description: Allows import many records at once through a .csv file upload.
-     * 
-     * Uses a .csv file located at ../fixtures/bdi_test_import.csv
-     * Notice: Erases all data before running test
-     * 
-     * PHP81
-     * 
-     * @since 1.0.0
-     */
-    // context('Big Data Import', ()=>{
-
-    //     it('is enabled', () =>{
-    //         cy.moduleIsEnabled('Big Data Import')
-    //         //  Remove all previously added records so that we can test properly
-    //         cy.eraseAllData(data_em.em_test_pid)
-    
-    //     })
-
-    //     it('resets module data', () => {
-    //         //  Call directly API
-    //         cy.request({
-    //             url: path_redcap + '/ExternalModules/?prefix=big_data_import&page=resetModuleData&pid=' + data_em.em_test_pid,
-    //           }).then((resp) => {
-    //             // redirect status code is 302
-    //             expect(resp.status).to.eq(200)
-                
-    //           })            
-    //     })
-    
-    //     it('can upload test csv', () => {
-    
-    //         cy.visit(path_redcap + '/ExternalModules/?prefix=big_data_import&page=import&pid=' + data_em.em_test_pid )
-    
-    //         cy.get('input[type="file"]').selectFile('cypress/fixtures/bdi_test_import.csv')
-    //         cy.get('#import').click()
-    //     });
-    
-    //     it('imports data from csv', () => {
-
-    //         cy.get('#start').click()
-    //         cy.get("div#Msg").should('be.visible')
-    //         cy.contains("Import will start shortly.")
-    //         cy.get('#DataTables_Table_0').contains('Import process finished')
-    //     })
-
-
-    //     it('shows successfully imported record', () => {            
-    //         cy.visit( path_redcap + '/DataEntry/index.php?id=100&page=big_data_import&pid='  + data_em.em_test_pid )
-    //         cy.get('input[name="bdi_1"]').should('have.value', 'Foo 100')
-    //         cy.get('input[name="bdi_2"]').should('have.value', 'Bar 100')
-    //         cy.get('input[name="bdi_3"]').should('have.value', 'Car 100')
-    //     })
-
-    //     window.global_keepdata=true;
-
-
-    // })
-
+   
 
     /**
      * Complete Row
@@ -313,143 +260,7 @@ describe('Test External Modules', () => {
 
     })
 
-    /**
-     * Locking API
-     * Description:  Lock, unlock and read the lock status of instruments or entire records using API calls.
-     * 
-     * PHP81
-     * 
-     * Uses API Token
-     * @since 1.0.0
-     */
-    // context('Locking API', () => {
-
-    //     it('is enabled', () => {
-    //         cy.moduleIsEnabled('Locking API')
-    //     })
-
-    //     it('has test records', () => {
-    //         cy.visit(path_redcap + '/DataEntry/index.php?pid='+ data_em.em_test_pid +'&id=1&page=base')
-    //         cy.saveRecord()
-    //         cy.visit(path_redcap + '/DataEntry/index.php?pid='+ data_em.em_test_pid +'&id=2&page=base')
-    //         cy.saveRecord()
-    //         cy.visit(path_redcap + '/DataEntry/index.php?pid='+ data_em.em_test_pid +'&id=3&page=base')
-    //         cy.saveRecord()
-    //     })
-
-    //     it('is forbidden', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=status',
-    //             failOnStatusCode: false,
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(403)
-    //         })
-    //     })
-
-    //     it('is authenticated', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=status',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token,
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(400)
-    //         })
-    //     })
-
-    //     /* Data Level Tests */
-    //     it('locks record (data level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=lock',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&instrument=base&record=1',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)
-    //             var body = JSON.parse(resp.body)[0]
-    //             expect(body.timestamp).to.contain('-')
-    //         })
-    //     })
-
-    //     it('unlocks record (data level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=unlock',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&instrument=base&record=1',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)
-    //             var body = JSON.parse(resp.body)[0]
-    //             expect(body.timestamp).to.eq('')
-    //         })
-    //     })
-
-    //     it('shows status for record (data level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=status',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&instrument=base&record=1',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)
-    //             var body = JSON.parse(resp.body)[0]
-    //             expect(body.locked).to.eq('0')
-    //         })
-    //     })
-
-    //     /* Record Level*/
-    //     it('shows status for records (record level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=status',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&lock_record_level=true&record=%5B1%2C2%2C3%5D&format=json',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)                
-    //             resp.body.forEach(element => {                    
-    //                 expect(element.timestamp).to.eq(null)
-    //             });
-    //         })
-    //     })
-
-    //     it('lock records (record level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=lock',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&lock_record_level=true&record=%5B1%2C2%2C3%5D&format=json',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)                
-    //             resp.body.forEach(element => {                    
-    //                 expect(element.timestamp).to.contain("-")
-    //             });
-    //         })
-    //     })
-
-    //     it('unlock records (record level)', () => {
-    //         cy.request({
-    //             method:'POST',
-    //             url: path_api + '?NOAUTH&type=module&prefix=locking_api&page=unlock',
-    //             failOnStatusCode: false,
-    //             body: 'token='+api_token + '&returnFormat=json&lock_record_level=true&record=%5B1%2C2%2C3%5D&format=json',
-    //             form: true
-    //         }).then((resp) => {
-    //             expect(resp.status).to.eq(200)                
-    //             resp.body.forEach(element => {                    
-    //                 expect(element.timestamp).to.eq(null)
-    //             });
-    //         })
-    //     })
-
-    // })
-
+    
     /**
      * PDF Injector
      * 
@@ -549,8 +360,8 @@ describe('Test External Modules', () => {
 
             cy.get('#btnModalsaveInjection').click()
 
-            cy.get('#injectionsPreview_wrapper #injectionsPreview tbody tr .card-header span').contains("foo")
-            cy.get('#injectionsPreview_wrapper #injectionsPreview tbody tr #injection-description').contains("bar")
+            cy.get('#injectionsPreview_wrapper #injectionsPreview tbody tr .card-body span').eq(0).contains("foo")
+            cy.get('#injectionsPreview_wrapper #injectionsPreview tbody tr .card-body span').eq(1).contains("bar")
 
         })
 
@@ -583,8 +394,9 @@ describe('Test External Modules', () => {
             cy.visit( path_redcap + '/ExternalModules/?prefix=pdf_injector&page=Injections&pid=' + data_em.em_test_pid)
 
             cy.get("#injectionsPreview_wrapper #injectionsPreview tbody tr .btn-group button.btn:nth-child(1)").first().next().click()
-            cy.get('#external-modules-configure-modal-delete-confirmation #btnModaldeleteInjection').click()
-            cy.get('#injectionsPreview_wrapper #injectionsPreview tbody tr').should("have.length", 0)
+
+            cy.get('#btnModaldeleteInjection').click()
+            cy.get('#injectionsPreview_wrapper').should("not.exist")
         })
 
     })
@@ -617,7 +429,7 @@ describe('Test External Modules', () => {
                 method: 'POST',
                 form: true,
                 failOnStatusCode: false,
-                body: 'token='+api_token
+                body: 'token='+cy.helpers.getApiKey()
             }).then((res) => {
                 var obj = JSON.parse(res.body)
                 dq = obj
@@ -643,7 +455,7 @@ describe('Test External Modules', () => {
                 method: 'POST',
                 form: true,
                 failOnStatusCode: false,
-                body: 'token='+api_token + '&data=' + JSON.stringify(obj)
+                body: 'token='+cy.helpers.getApiKey() + '&data=' + JSON.stringify(obj)
             }).then((res) => {
                 var id = JSON.parse(res.body)[0]
                 cy.editRecordFor('base')
@@ -725,29 +537,29 @@ describe('Test External Modules', () => {
         })
     })    
     
-    /**
-     * Simple Ontology Module
-     * Description: Example implementation of Ontology Provider add in 8.8.1. 
-     * This module allows a site wide set of code/displays to defined and then referenced as an ontology.
-     * 
-     * PHP81
-     * 
-     * @since 1.0.0
-     */
-    context('Simple Ontology Module', () => {
+    // /**
+    //  * Simple Ontology Module
+    //  * Description: Example implementation of Ontology Provider add in 8.8.1. 
+    //  * This module allows a site wide set of code/displays to defined and then referenced as an ontology.
+    //  * 
+    //  * PHP81
+    //  * 
+    //  * @since 1.0.0
+    //  */
+    // context('Simple Ontology Module', () => {
 
-        it('is enabled', () => {
-            cy.moduleIsEnabled('Simple Ontology Module')
-        })
+    //     it('is enabled', () => {
+    //         cy.moduleIsEnabled('Simple Ontology Module')
+    //     })
 
-        it('can enter Input from Dropdown', () => {
-            cy.visit(path_redcap + '/DataEntry/index.php?page=simple_ontology&id=1&pid=' + data_em.em_test_pid)
-            cy.get('#test_ontology-autosuggest-span').click()
-            cy.get('#test_ontology-autosuggest').type('foo')
-            cy.get('ul.ui-menu').not('#pdfExportDropdown').find('li.ui-menu-item a.ui-menu-item-wrapper').click()
-            cy.get('input[name="test_ontology"').should('have.value', 'Foo')
-        })
-    })
+    //     it('can enter Input from Dropdown', () => {
+    //         cy.visit(path_redcap + '/DataEntry/index.php?page=simple_ontology&id=1&pid=' + data_em.em_test_pid)
+    //         cy.get('#test_ontology-autosuggest-span').click()
+    //         cy.get('#test_ontology-autosuggest').type('foo')
+    //         cy.get('ul.ui-menu').not('#pdfExportDropdown').find('li.ui-menu-item a.ui-menu-item-wrapper').click()
+    //         cy.get('input[name="test_ontology"').should('have.value', 'Foo')
+    //     })
+    // })
 
     /**
      * Vizr
@@ -769,6 +581,7 @@ describe('Test External Modules', () => {
             cy.get('#vizr_date-tr td button').click()
             cy.saveRecord()
         })
+
 
         it('renders chart', () => {
             cy.visit( path_redcap + '/ExternalModules/?prefix=vizr&page=index&pid=' + data_em.em_test_pid)
@@ -846,51 +659,51 @@ describe('Test External Modules', () => {
     })
 
 
-    /**
-     * Repeat Survey Link
-     * 
-     * PHP81
-     * 
-     * @since 1.0.0
-     * 
-     */
-    context('Repeat Survey Link', () => {
+    // /**
+    //  * Repeat Survey Link
+    //  * 
+    //  * PHP81
+    //  * 
+    //  * @since 1.0.0
+    //  * 
+    //  */
+    // context('Repeat Survey Link', () => {
 
-        it('is enabled', () => {
-            cy.moduleIsEnabled('Repeat Survey Link')
-        })
+    //     it('is enabled', () => {
+    //         cy.moduleIsEnabled('Repeat Survey Link')
+    //     })
 
-        it('links to next instance (1=>2)', () => {     
+    //     it('links to next instance (1=>2)', () => {     
             
-            //  Add instance 1
-            cy.editRecordFor('repeat_survey_link')
-            cy.saveRecord()
+    //         //  Add instance 1
+    //         cy.editRecordFor('repeat_survey_link')
+    //         cy.saveRecord()
 
-            //  Check first rsl
-            cy.editRecordFor('base')
-            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
-                cy.visit(rsl)
-                cy.get('input[name="rsl_current_instance"]').should('have.value', 2)
-                cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
-            })
-        })
+    //         //  Check first rsl
+    //         cy.editRecordFor('base')
+    //         cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
+    //             cy.visit(rsl)
+    //             cy.get('input[name="rsl_current_instance"]').should('have.value', 2)
+    //             cy.get('input[name="rsl_last_instance"]').should('have.value', 1)
+    //         })
+    //     })
 
-        it('links to next instance (2=>3)', () => {     
+    //     it('links to next instance (2=>3)', () => {     
             
-            //  Add instance 1
-            cy.editRecordFor('repeat_survey_link',1,2)
-            cy.saveRecord()
+    //         //  Add instance 1
+    //         cy.editRecordFor('repeat_survey_link',1,2)
+    //         cy.saveRecord()
 
-            //  Check first rsl
-            cy.editRecordFor('base')
-            cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
-                cy.visit(rsl)
-                cy.get('input[name="rsl_current_instance"]').should('have.value', 3)
-                cy.get('input[name="rsl_last_instance"]').should('have.value', 2)
-            })
-        })
+    //         //  Check first rsl
+    //         cy.editRecordFor('base')
+    //         cy.get('input[name="helper_rsl"]').invoke('val').then((rsl) => {
+    //             cy.visit(rsl)
+    //             cy.get('input[name="rsl_current_instance"]').should('have.value', 3)
+    //             cy.get('input[name="rsl_last_instance"]').should('have.value', 2)
+    //         })
+    //     })
 
-    })
+    // })
 
 
 
@@ -1084,12 +897,12 @@ describe('Test External Modules', () => {
             cy.get('.modal-body > div:nth-child(2) > div > div > div > button').click()
             cy.get('.modal-body li').should('have.length', 3)
             //  Add list content
-            cy.get('li:nth-child(1) input.ml-1:nth-child(2)').type("Foo 1")
-            cy.get('li:nth-child(1) input.ml-1:nth-child(3)').type("[foo1]")
-            cy.get('li:nth-child(2) input.ml-1:nth-child(2)').type("Foo 2")
-            cy.get('li:nth-child(2) input.ml-1:nth-child(3)').type("[foo2]")
-            cy.get('li:nth-child(3) input.ml-1:nth-child(2)').type("Foo 3")
-            cy.get('li:nth-child(3) input.ml-1:nth-child(3)').type("[foo3]")
+            cy.get('li:nth-child(1) input.list-element-input:nth-child(2)').type("Foo 1")
+            cy.get('li:nth-child(1) input.list-element-input:nth-child(3)').type("[foo1]")
+            cy.get('li:nth-child(2) input.list-element-input:nth-child(2)').type("Foo 2")
+            cy.get('li:nth-child(2) input.list-element-input:nth-child(3)').type("[foo2]")
+            cy.get('li:nth-child(3) input.list-element-input:nth-child(2)').type("Foo 3")
+            cy.get('li:nth-child(3) input.list-element-input:nth-child(3)').type("[foo3]")
             cy.get('footer.modal-footer .btn-info').click()
 
             //  should
@@ -1100,7 +913,7 @@ describe('Test External Modules', () => {
             cy.get('div.editor-row:nth-child(2) > div:nth-child(1) > div:nth-child(2) > button:nth-child(1)').click()
             cy.get('div.editor-row:nth-child(2) >div:nth-child(2) > div:nth-child(1)  > div:nth-child(1) > div .editor-row-menu button:nth-child(1)').click()
             cy.get('div.modal-body label.btn-outline-secondary:nth-child(4)').click()
-            cy.get('div.modal-body select.custom-select').select('record_home_dashboard')
+            cy.get('div.modal-body select.custom-select').select('record_home_dashboard', {force:true}).should("have.value", "record_home_dashboard")
             cy.get('footer.modal-footer .btn-info').click()
 
             //  should

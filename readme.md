@@ -29,7 +29,8 @@ for example:
     "environment": "local",
     "version": "13.1.32",
     "username": "username",
-    "password": "password"
+    "password": "password",
+    "api_token": "api-token"
 }
 ```
 

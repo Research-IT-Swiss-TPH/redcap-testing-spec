@@ -30,8 +30,8 @@ const path_redcap = '/redcap_v' + Cypress.env('version')
 
 Cypress.Commands.add('login', () => {
     cy.visit('/')
-    cy.get('input[name=username]').type(Cypress.env('username'))
-    cy.get('input[name=password]').type(Cypress.env('password'))
+    cy.get('input[name=username]').type(cy.helpers.getUsername())
+    cy.get('input[name=password]').type(cy.helpers.getPassword())
     cy.get('button#login_btn').click()
     //cy.get('#username-reference').contains(Cypress.env('username'))
 })

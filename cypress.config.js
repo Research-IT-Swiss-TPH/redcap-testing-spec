@@ -6,7 +6,6 @@ const path = require('path');
 
 
 module.exports = defineConfig({
-  projectId: "zyp8bc",
   experimentalInteractiveRunEvents: true,
   reporter: 'cypress-multi-reporters',
   reporterOptions: {
@@ -14,10 +13,10 @@ module.exports = defineConfig({
     cypressMochawesomeReporterReporterOptions: {
       reportDir: 'cypress/reports',
       charts: true,
-      reportPageTitle: 'REDCap Testing PROD',
       embeddedScreenshots: true,
       inlineAssets: true,
-      markdown: true
+      markdown: true,
+      reportPageTitle: "REDCap Automated Test Report",
     },
     mochaJunitReporterReporterOptions: {
       mochaFile: 'cypress/reports/junit/results-[hash].xml',
@@ -31,8 +30,6 @@ module.exports = defineConfig({
     baseUrl: 'http://redcap-local.test/redcap/',
     specPattern: 'cypress/e2e/*.cy.js',
 
-    // We've imported your old cypress plugins here.
-    // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
 
       on('task', {

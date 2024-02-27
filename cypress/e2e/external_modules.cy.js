@@ -1053,16 +1053,25 @@ describe('Test External Modules', () => {
      * 
      * @since 1.0.0    
      */
-     context('Add Instance on Save', () => {
+     context.only('Add Instance on Save', () => {
 
         it('is enabled', () => {
             cy.moduleIsEnabled('Add Instance on Save')
 
-            //  Reset record=1 and add clean record to be in sync with #test EM project
+            //  Test fixtures
+
+            //  Reset record=1 from cross-testing-project and add clean record to be in sync with #test EM project
             cy.deleteRecord(1, data_em.cross_test_pid)
             cy.editRecordFor('base',1,1, data_em.cross_test_pid)
             cy.saveRecord()
 
+            //  Reset record=2 from cross-testing-project and add clean record to be in sync with #test EM project
+            cy.deleteRecord(2, data_em.cross_test_pid)
+            cy.editRecordFor('base',2,1, data_em.cross_test_pid)
+            cy.saveRecord()
+        })
+
+        it('triggers AIOS in data entry mode', () => {
             //  Trigger AIOS
             cy.editRecordFor('base')
             cy.get('input[name="helper_aios"]').clear().type('test-aios-input')
@@ -1080,6 +1089,38 @@ describe('Test External Modules', () => {
             cy.get('input[name="aios_current_instance"]').should('have.value', 1)
             cy.get('input[name="aios_pipe_target"]').should('have.value', 'test-aios-input')
         })
+
+
+        it('triggers AIOS in survey mode', () => {
+
+            cy.editRecordFor('survey',2)
+            cy.get('#submit-btn-savecontinue').click()
+
+            cy.get('input[name="survey_url"]').invoke('val').then( (survey_url) => {
+                cy.logout()
+                cy.visit(survey_url)
+            })
+
+            cy.get('input[name="survey_helper_aios"').clear().type('test-aios-survey-input')
+            cy.submitSurvey()
+            cy.login()
+        })
+
+        it('add first instance on submit in same project', () => {
+            cy.editRecordFor('add_instance_on_save',2,1)
+            cy.get('input[name="aios_current_instance"]').should('have.value', 1)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', 'test-aios-survey-input')
+        })
+
+        it('add first instance on submit in cross project', () => {
+            cy.editRecordFor('add_instance_on_save',2,1, data_em.cross_test_pid)
+            cy.get('input[name="aios_current_instance"]').should('have.value', 1)
+            cy.get('input[name="aios_pipe_target"]').should('have.value', 'test-aios-survey-input')
+        })
+        
+
+
+
     })
 
 

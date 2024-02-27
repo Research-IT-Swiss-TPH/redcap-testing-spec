@@ -1,4 +1,4 @@
-# redcap-dev-spec
+# redcap-testing-spec
 Cypress project for redcap testing:
 
 - system config

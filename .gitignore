@@ -3,3 +3,5 @@ cypress.env-prod.json
 cypress.env-dev.json
 node_modules
 cypress/reports/
+cypress/screenshots/
+cypress/reports/

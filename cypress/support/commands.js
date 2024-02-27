@@ -54,15 +54,15 @@ Cypress.Commands.add('editRecordFor', (instrument, record=1, instance=1, pid=dat
     cy.visit(path_redcap + '/DataEntry/index.php?page='+instrument+'&id='+record+'&pid=' + pid + '&instance=' + instance)
 })
 
-Cypress.Commands.add('openSurvey', (instrument, record=1, instance=1, pid=data_em.em_test_pid) => {
-    cy.visit(path_redcap + '/DataEntry/index.php?page='+instrument+'&id='+record+'&pid=' + pid + '&instance=' + instance)
-    cy.get('#submit-btn-savecontinue').click()
+// Cypress.Commands.add('openSurvey', (instrument, record=1, instance=1, pid=data_em.em_test_pid) => {
+//     cy.visit(path_redcap + '/DataEntry/index.php?page='+instrument+'&id='+record+'&pid=' + pid + '&instance=' + instance)
+//     cy.get('#submit-btn-savecontinue').click()
 
-    cy.get('#SurveyActionDropDown').click()
-    cy.get('#SurveyActionDropDownUl').find('#surveyoption-openSurvey').should('have.attr', 'href').then((onClick) => {
-        cy.log(onClick)
-    })
-})
+//     cy.get('#SurveyActionDropDown').click()
+//     cy.get('#SurveyActionDropDownUl').find('#surveyoption-openSurvey').should('have.attr', 'href').then((onClick) => {
+//         cy.log(onClick)
+//     })
+// })
 
 Cypress.Commands.add('deleteRecord', (record, pid=data_em.em_test_pid) => {
     cy.visit(path_redcap + '/DataEntry/record_home.php?pid=' + pid + '&id='+record)

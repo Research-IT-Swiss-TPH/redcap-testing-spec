@@ -56,4 +56,5 @@ In case of errors, clear cache:
 .\node_modules\.bin\cypress cache clear
 ```
 
-
+## Developer Note
+The code base is rather outdated and uses Cypress v10.11.0. Do not use a newer Cypress version or it will break the tests. It is highly recommended to update the spec to be used with newer Cypress. Breaking changes are present in Cookie Handling and Authentication Flow. 

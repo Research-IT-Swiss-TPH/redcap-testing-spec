@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="#test - EXTERNAL MODULES" AsOfDateTime="2022-05-13T13:11:07" CreationDateTime="2022-05-13T13:11:07" SourceSystem="REDCap" SourceSystemVersion="12.0.25">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="#test - EXTERNAL MODULES" AsOfDateTime="2025-03-28T08:58:29" CreationDateTime="2025-03-28T08:58:29" SourceSystem="REDCap" SourceSystemVersion="15.0.16">
 <Study OID="Project.TestEXTERNALMODULES">
 <GlobalVariables>
 	<StudyName>#test - EXTERNAL MODULES</StudyName>
@@ -8,13 +8,36 @@
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
+	<redcap:SecondaryUniqueFieldDisplayValue>0</redcap:SecondaryUniqueFieldDisplayValue>
+	<redcap:SecondaryUniqueFieldDisplayLabel>0</redcap:SecondaryUniqueFieldDisplayLabel>
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>1</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
+	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
+	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
+	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
+	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
+	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
+	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
 	<redcap:Purpose>3</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
 	<redcap:ProjectNotes>This database includes all external modules that are installed and used on the production server. Used for automated testing of fundamental module functions.</redcap:ProjectNotes>
+	<redcap:SurveyAuthEnabled>0</redcap:SurveyAuthEnabled>
+	<redcap:SurveyAuthField1></redcap:SurveyAuthField1>
+	<redcap:SurveyAuthEvent1></redcap:SurveyAuthEvent1>
+	<redcap:SurveyAuthField2></redcap:SurveyAuthField2>
+	<redcap:SurveyAuthEvent2></redcap:SurveyAuthEvent2>
+	<redcap:SurveyAuthField3></redcap:SurveyAuthField3>
+	<redcap:SurveyAuthEvent3></redcap:SurveyAuthEvent3>
+	<redcap:SurveyAuthMinFields></redcap:SurveyAuthMinFields>
+	<redcap:SurveyAuthApplyAllSurveys>1</redcap:SurveyAuthApplyAllSurveys>
+	<redcap:SurveyAuthCustomMessage></redcap:SurveyAuthCustomMessage>
+	<redcap:SurveyAuthFailLimit></redcap:SurveyAuthFailLimit>
+	<redcap:SurveyAuthFailWindow></redcap:SurveyAuthFailWindow>
 	<redcap:HideFilledForms>1</redcap:HideFilledForms>
+	<redcap:HideDisabledForms>0</redcap:HideDisabledForms>
 	<redcap:FormActivationSurveyAutocontinue>1</redcap:FormActivationSurveyAutocontinue>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
@@ -25,34 +48,38 @@
 		<redcap:RepeatingInstruments>
 			<redcap:RepeatingInstrument redcap:UniqueEventName="event_1_arm_1" redcap:RepeatInstrument="instance_table" redcap:CustomLabel=""/>
 			<redcap:RepeatingInstrument redcap:UniqueEventName="event_1_arm_1" redcap:RepeatInstrument="repeat_survey_link" redcap:CustomLabel=""/>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="event_1_arm_1" redcap:RepeatInstrument="record_home_dashboard" redcap:CustomLabel=""/>
 			<redcap:RepeatingInstrument redcap:UniqueEventName="event_1_arm_1" redcap:RepeatInstrument="add_instance_on_save" redcap:CustomLabel=""/>
 		</redcap:RepeatingInstruments>
 	</redcap:RepeatingInstrumentsAndEvents>
 	<redcap:SurveysGroup>
 		<redcap:Surveys form_name="survey" title="Survey" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 		<redcap:Surveys form_name="custom_survey_landing_page" title="Custom Survey Landing Page" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 		<redcap:Surveys form_name="custom_participant_export" title="Custom Participant Export" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 		<redcap:Surveys form_name="unique_action_tag" title="Unique Action Tag" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="AFTER_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 		<redcap:Surveys form_name="repeat_survey_link" title="Repeat Survey Link" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="BEFORE_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="BEFORE_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 		<redcap:Surveys form_name="address_auto_complete" title="Address Auto Complete" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="HIDDEN" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="1" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5=""/>
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="0" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="1" font_family="16" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="HIDDEN" response_limit="" response_limit_include_partials="1" response_limit_custom_text="&lt;p&gt;Thank you for your interest; however, the survey is closed because the maximum number of responses has been reached.&lt;/p&gt;" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="1" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
 	</redcap:SurveysGroup>
+	<redcap:ReportsGroup>
+		<redcap:Reports title="PDFI Report" unique_report_name="R-343FCN7CYD" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="RECORD" dynamic_filter1="record_id" dynamic_filter2="checkbox_1" dynamic_filter3="" hash="DC8A4P43WN9YL39T" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="77de68daecd823babbb58edb1c8e14d7106e83bb"/>
+	</redcap:ReportsGroup>
 	<redcap:FormDisplayLogicConditionsGroup>
 		<redcap:FormDisplayLogicConditions control_condition="[event_1_arm_1][helper_frsl] &gt; &quot;21&quot;" forms_events="event_1_arm_1:form_render_skip_logic"/>
 	</redcap:FormDisplayLogicConditionsGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.TestEXTERNALMODULES_2022-05-13_1311" Name="#test - EXTERNAL MODULES" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.TestEXTERNALMODULES_2025-03-28_0858" Name="#test - EXTERNAL MODULES" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.base" Name="Base" Repeating="No" redcap:FormName="base">
 		<ItemGroupRef ItemGroupOID="base.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="base.base_complete" Mandatory="No"/>
@@ -130,6 +157,7 @@
 		<ItemGroupRef ItemGroupOID="address_auto_complete.address_auto_complete_complete" Mandatory="No"/>
 	</FormDef>
 	<FormDef OID="Form.record_home_dashboard" Name="Record Home Dashboard" Repeating="No" redcap:FormName="record_home_dashboard">
+		<ItemGroupRef ItemGroupOID="record_home_dashboard.foo1" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="record_home_dashboard.record_home_dashboard_complete" Mandatory="No"/>
 	</FormDef>
 	<FormDef OID="Form.add_instance_on_save" Name="Add Instance On Save" Repeating="No" redcap:FormName="add_instance_on_save">
@@ -144,6 +172,10 @@
 		<ItemGroupRef ItemGroupOID="date_calculated_fields.dcf_source" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="date_calculated_fields.date_calculated_fields_complete" Mandatory="No"/>
 	</FormDef>
+	<FormDef OID="Form.export_data_dictionary_changes" Name="Export Data Dictionary Changes" Repeating="No" redcap:FormName="export_data_dictionary_changes">
+		<ItemGroupRef ItemGroupOID="export_data_dictionary_changes.foo___1" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="export_data_dictionary_changes.export_data_dictionary_changes_complete" Mandatory="No"/>
+	</FormDef>
 	<ItemGroupDef OID="base.record_id" Name="Base" Repeating="No">
 		<ItemRef ItemOID="record_id" Mandatory="No" redcap:Variable="record_id"/>
 		<ItemRef ItemOID="helper_frsl" Mandatory="No" redcap:Variable="helper_frsl"/>
@@ -151,6 +183,7 @@
 		<ItemRef ItemOID="helper_dqa" Mandatory="No" redcap:Variable="helper_dqa"/>
 		<ItemRef ItemOID="helper_aios" Mandatory="No" redcap:Variable="helper_aios"/>
 		<ItemRef ItemOID="helper_data_quality_api" Mandatory="No" redcap:Variable="helper_data_quality_api"/>
+		<ItemRef ItemOID="helper_rhd" Mandatory="No" redcap:Variable="helper_rhd"/>
 	</ItemGroupDef>
 	<ItemGroupDef OID="base.base_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="base_complete" Mandatory="No" redcap:Variable="base_complete"/>
@@ -158,6 +191,8 @@
 	<ItemGroupDef OID="survey.multilingual_test" Name="Survey" Repeating="No">
 		<ItemRef ItemOID="multilingual_test" Mandatory="No" redcap:Variable="multilingual_test"/>
 		<ItemRef ItemOID="languages" Mandatory="No" redcap:Variable="languages"/>
+		<ItemRef ItemOID="survey_helper_aios" Mandatory="No" redcap:Variable="survey_helper_aios"/>
+		<ItemRef ItemOID="survey_url" Mandatory="No" redcap:Variable="survey_url"/>
 	</ItemGroupDef>
 	<ItemGroupDef OID="survey.survey_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="survey_complete" Mandatory="No" redcap:Variable="survey_complete"/>
@@ -267,6 +302,7 @@
 		<ItemRef ItemOID="pdfi_text_1" Mandatory="No" redcap:Variable="pdfi_text_1"/>
 		<ItemRef ItemOID="pdfi_text_2" Mandatory="No" redcap:Variable="pdfi_text_2"/>
 		<ItemRef ItemOID="checkbox_1" Mandatory="No" redcap:Variable="checkbox_1"/>
+		<ItemRef ItemOID="pdf_injector_download" Mandatory="No" redcap:Variable="pdf_injector_download"/>
 	</ItemGroupDef>
 	<ItemGroupDef OID="pdf_injector.pdf_injector_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="pdf_injector_complete" Mandatory="No" redcap:Variable="pdf_injector_complete"/>
@@ -288,9 +324,15 @@
 		<ItemRef ItemOID="aac_country_1" Mandatory="No" redcap:Variable="aac_country_1"/>
 		<ItemRef ItemOID="aac_note_1" Mandatory="No" redcap:Variable="aac_note_1"/>
 		<ItemRef ItemOID="aac_survey_url" Mandatory="No" redcap:Variable="aac_survey_url"/>
+		<ItemRef ItemOID="aac_geo_date" Mandatory="No" redcap:Variable="aac_geo_date"/>
 	</ItemGroupDef>
 	<ItemGroupDef OID="address_auto_complete.address_auto_complete_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="address_auto_complete_complete" Mandatory="No" redcap:Variable="address_auto_complete_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="record_home_dashboard.foo1" Name="Record Home Dashboard" Repeating="No">
+		<ItemRef ItemOID="foo1" Mandatory="No" redcap:Variable="foo1"/>
+		<ItemRef ItemOID="foo2" Mandatory="No" redcap:Variable="foo2"/>
+		<ItemRef ItemOID="foo3" Mandatory="No" redcap:Variable="foo3"/>
 	</ItemGroupDef>
 	<ItemGroupDef OID="record_home_dashboard.record_home_dashboard_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="record_home_dashboard_complete" Mandatory="No" redcap:Variable="record_home_dashboard_complete"/>
@@ -316,6 +358,14 @@
 	<ItemGroupDef OID="date_calculated_fields.date_calculated_fields_complete" Name="Form Status" Repeating="No">
 		<ItemRef ItemOID="date_calculated_fields_complete" Mandatory="No" redcap:Variable="date_calculated_fields_complete"/>
 	</ItemGroupDef>
+	<ItemGroupDef OID="export_data_dictionary_changes.foo___1" Name="" Repeating="No">
+		<ItemRef ItemOID="foo___1" Mandatory="No" redcap:Variable="foo"/>
+		<ItemRef ItemOID="foo___2" Mandatory="No" redcap:Variable="foo"/>
+		<ItemRef ItemOID="foo___3" Mandatory="No" redcap:Variable="foo"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="export_data_dictionary_changes.export_data_dictionary_changes_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="export_data_dictionary_changes_complete" Mandatory="No" redcap:Variable="export_data_dictionary_changes_complete"/>
+	</ItemGroupDef>
 	<ItemDef OID="record_id" Name="record_id" DataType="text" Length="999" redcap:Variable="record_id" redcap:FieldType="text">
 		<Question><TranslatedText>Record ID</TranslatedText></Question>
 	</ItemDef>
@@ -334,6 +384,9 @@
 	<ItemDef OID="helper_data_quality_api" Name="helper_data_quality_api" DataType="text" Length="999" redcap:Variable="helper_data_quality_api" redcap:FieldType="text">
 		<Question><TranslatedText>Helper Data Quality API</TranslatedText></Question>
 	</ItemDef>
+	<ItemDef OID="helper_rhd" Name="helper_rhd" DataType="text" Length="999" redcap:Variable="helper_rhd" redcap:FieldType="text">
+		<Question><TranslatedText>Helper RHD</TranslatedText></Question>
+	</ItemDef>
 	<ItemDef OID="base_complete" Name="base_complete" DataType="text" Length="1" redcap:Variable="base_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
 		<CodeListRef CodeListOID="base_complete.choices"/>
@@ -344,6 +397,12 @@
 	<ItemDef OID="languages" Name="languages" DataType="text" Length="1" redcap:Variable="languages" redcap:FieldType="select">
 		<Question><TranslatedText>Languages</TranslatedText></Question>
 		<CodeListRef CodeListOID="languages.choices"/>
+	</ItemDef>
+	<ItemDef OID="survey_helper_aios" Name="survey_helper_aios" DataType="text" Length="999" redcap:Variable="survey_helper_aios" redcap:FieldType="text">
+		<Question><TranslatedText>Survey Helper AIOS</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="survey_url" Name="survey_url" DataType="text" Length="999" redcap:Variable="survey_url" redcap:FieldType="text" redcap:FieldAnnotation="@CALCTEXT([survey-url])">
+		<Question><TranslatedText>Survey Url</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="survey_complete" Name="survey_complete" DataType="text" Length="1" redcap:Variable="survey_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
@@ -472,7 +531,8 @@
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
 		<CodeListRef CodeListOID="custom_participant_export_complete.choices"/>
 	</ItemDef>
-	<ItemDef OID="unique" Name="unique" DataType="text" Length="999" redcap:Variable="unique" redcap:FieldType="text" redcap:FieldAnnotation="@UNIQUE">
+	<ItemDef OID="unique" Name="unique" DataType="text" Length="999" redcap:Variable="unique" redcap:FieldType="text" redcap:FieldAnnotation="@UNIQUE
+@UNIQUE-DIALOG=&quot;Fooo&quot;">
 		<Question><TranslatedText>Unique</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="unique_strict" Name="unique_strict" DataType="text" Length="999" redcap:Variable="unique_strict" redcap:FieldType="text" redcap:FieldAnnotation="@UNIQUE-STRICT=&quot;helper_unique_strict&quot;
@@ -508,6 +568,9 @@
 	<ItemDef OID="checkbox_1" Name="checkbox_1" DataType="boolean" Length="1" redcap:Variable="checkbox_1" redcap:FieldType="truefalse">
 		<Question><TranslatedText>Checkbox 1</TranslatedText></Question>
 		<CodeListRef CodeListOID="checkbox_1.choices"/>
+	</ItemDef>
+	<ItemDef OID="pdf_injector_download" Name="pdf_injector_download" DataType="text" Length="999" redcap:Variable="pdf_injector_download" redcap:FieldType="descriptive" redcap:FieldAnnotation="@PDFI=&#039;92,89&#039;">
+		<Question><TranslatedText>PDF Injector Download</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="pdf_injector_complete" Name="pdf_injector_complete" DataType="text" Length="1" redcap:Variable="pdf_injector_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
@@ -551,9 +614,21 @@
 	<ItemDef OID="aac_survey_url" Name="aac_survey_url" DataType="text" Length="999" redcap:Variable="aac_survey_url" redcap:FieldType="text" redcap:FieldAnnotation="@CALCTEXT([survey-url])">
 		<Question><TranslatedText>AAC Survey URL</TranslatedText></Question>
 	</ItemDef>
+	<ItemDef OID="aac_geo_date" Name="aac_geo_date" DataType="text" Length="999" redcap:Variable="aac_geo_date" redcap:FieldType="text" redcap:FieldAnnotation="@READONLY">
+		<Question><TranslatedText>AAC Geo DAte</TranslatedText></Question>
+	</ItemDef>
 	<ItemDef OID="address_auto_complete_complete" Name="address_auto_complete_complete" DataType="text" Length="1" redcap:Variable="address_auto_complete_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
 		<CodeListRef CodeListOID="address_auto_complete_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="foo1" Name="foo1" DataType="text" Length="999" redcap:Variable="foo1" redcap:FieldType="text">
+		<Question><TranslatedText>foo1</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="foo2" Name="foo2" DataType="text" Length="999" redcap:Variable="foo2" redcap:FieldType="text">
+		<Question><TranslatedText>foo2</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="foo3" Name="foo3" DataType="text" Length="999" redcap:Variable="foo3" redcap:FieldType="text" redcap:FieldAnnotation="@CALCTEXT(&quot;Foo&quot;)">
+		<Question><TranslatedText>foo3</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="record_home_dashboard_complete" Name="record_home_dashboard_complete" DataType="text" Length="1" redcap:Variable="record_home_dashboard_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
@@ -588,6 +663,22 @@
 	<ItemDef OID="date_calculated_fields_complete" Name="date_calculated_fields_complete" DataType="text" Length="1" redcap:Variable="date_calculated_fields_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
 		<CodeListRef CodeListOID="date_calculated_fields_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="foo___1" Name="foo___1" DataType="boolean" Length="1" redcap:Variable="foo" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Foo</TranslatedText></Question>
+		<CodeListRef CodeListOID="foo___1.choices"/>
+	</ItemDef>
+	<ItemDef OID="foo___2" Name="foo___2" DataType="boolean" Length="1" redcap:Variable="foo" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Foo</TranslatedText></Question>
+		<CodeListRef CodeListOID="foo___2.choices"/>
+	</ItemDef>
+	<ItemDef OID="foo___3" Name="foo___3" DataType="boolean" Length="1" redcap:Variable="foo" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Foo</TranslatedText></Question>
+		<CodeListRef CodeListOID="foo___3.choices"/>
+	</ItemDef>
+	<ItemDef OID="export_data_dictionary_changes_complete" Name="export_data_dictionary_changes_complete" DataType="text" Length="1" redcap:Variable="export_data_dictionary_changes_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="export_data_dictionary_changes_complete.choices"/>
 	</ItemDef>
 	<CodeList OID="base_complete.choices" Name="base_complete" DataType="text" redcap:Variable="base_complete">
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
@@ -713,6 +804,23 @@
 		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
 	</CodeList>
 	<CodeList OID="date_calculated_fields_complete.choices" Name="date_calculated_fields_complete" DataType="text" redcap:Variable="date_calculated_fields_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="foo___1.choices" Name="foo___1" DataType="boolean" redcap:Variable="foo" redcap:CheckboxChoices="1, Esperanto|2, Spanish|3, La">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="foo___2.choices" Name="foo___2" DataType="boolean" redcap:Variable="foo" redcap:CheckboxChoices="1, Esperanto|2, Spanish|3, La">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="foo___3.choices" Name="foo___3" DataType="boolean" redcap:Variable="foo" redcap:CheckboxChoices="1, Esperanto|2, Spanish|3, La">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="export_data_dictionary_changes_complete.choices" Name="export_data_dictionary_changes_complete" DataType="text" redcap:Variable="export_data_dictionary_changes_complete">
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>

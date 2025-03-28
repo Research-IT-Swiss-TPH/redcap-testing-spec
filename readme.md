@@ -91,6 +91,10 @@ npm run prod
 
 After running Cypress Tests in headless mode, a html report will be generated and saved in `cypress\reports`. Report settings can be adjusted in `cypress.config.js`.
 
+## Testing Projects
+
+You can find testing project and EM data in `/redcap`. For a detailed instruction on how to setup testing projects see the PDF `redcap/Testing Project Setup.pdf`.
+
 ## Troublshooting
 
 Adding `:open` to npm script commands will open Cypress in headed that helps debugging.

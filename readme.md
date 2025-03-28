@@ -4,6 +4,13 @@ Cypress testing specification for REDCap External Modules test.
 > [!WARNING]
 > This code base is outdated and uses Cypress v10.11.0. Upgrading to a newer Cypress version will break the tests. Breaking changes are present in cookie handling and authentication flow. However, to sustain the automated testing it is **highly recommended** to update the testing specification to a newer version of Cypress.
 
+## Requirements
+
+- Node.js: v18.8.0
+- npm: 8.18.0
+
+> [!TIP]
+> Use a node version manager like fnm or nvm to setup your development environment easily.
 
 ## Setup
 

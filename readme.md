@@ -1,9 +1,5 @@
 # redcap-testing-spec
-Cypress project for redcap testing:
-
-- system config
-- em config
-- (projects)
+Cypress testing specification for REDCap External Modules test.
 
 > [!WARNING]
 > This code base is outdated and uses Cypress v10.11.0. Upgrading to a newer Cypress version will break the tests. Breaking changes are present in cookie handling and authentication flow. However, to sustain the automated testing it is **highly recommended** to update the testing specification to a newer version of Cypress.

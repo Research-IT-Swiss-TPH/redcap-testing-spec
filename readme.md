@@ -16,7 +16,7 @@ Cypress testing specification for REDCap External Modules test.
 
 Clone repository:
 ```bash
-git clone https://github.com/tertek/redcap-testing-spec.git
+git clone https://github.com/Research-IT-Swiss-TPH/redcap-testing-spec.git
 cd redcap-dev-spec
 ```
 
@@ -50,27 +50,26 @@ The configuration is used to control how Cypress connects to the target and auth
 
 The credentials are used to login to the specific REDCap instance and have the environment as a suffix to the variable's key.
 
-
-Ensure required permissions are set within project directory:
+> [!IMPORTANT]
+> Ensure required permissions are set within project directory.
 - Directory /cypress/downloads needs to be writable
 - Directory /cypress/fixtures needs to be readable
 
 ## Usage
 
 ### General Cypress Usage
-Note: The repo has pre-formated npm scripts that have been adjusted to run with the Swiss TPH environments. See below.
+> [!NOTE]
+> Note: The repo has ready-made npm scripts that have been adjusted to run with the Swiss TPH environments. See recommended usage below.
 
-Open in Cypress Client:
 ```bash
+# Open in Cypress Client
 .\node_modules\.bin\cypress open
-```
 
-Headless with calling reports::
-```bash
+# Headless with calling reports
 .\node_modules\.bin\cypress run
 ```
 
-### Pre-formated usage
+### Recommended usage
 See package.json `scripts` for details.
 
 Run local:
@@ -105,7 +104,6 @@ You can find testing project and EM data in `/redcap`. For a detailed instructio
 ## Troublshooting
 
 Adding `:open` to npm script commands will open Cypress in headed that helps debugging.
-
 
 In case of errors, clear cache:
 ```bash
